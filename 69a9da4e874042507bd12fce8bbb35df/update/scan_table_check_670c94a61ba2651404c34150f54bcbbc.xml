@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_table_check">
+    <scan_table_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced>false</advanced>
+        <attributes/>
+        <category>manageability</category>
+        <conditions/>
+        <description>Adding users to the groups in non-production instance is not recommended. </description>
+        <documentation_url>https://prima4pwp.bayer-ag.com/IdentityManagement/aspx/customized/CustomizedObjects.aspx?type=RoleHierarchy&amp;searchtype=13faa6e8-7d15-49bc-ac1a-7ffbf23f614c</documentation_url>
+        <finding_type>scan_finding</finding_type>
+        <name>Assignment user to group</name>
+        <priority>2</priority>
+        <resolution_details>If you are the Owner of the respective group, you can update the Membership in Prima under Roles &gt; My Roles (check out link in more information) or request it via IT4You (below URL)&#13;
+&#13;
+https://bayersi.service-now.com/sp?id=sc_cat_item&amp;sys_id=1f97787a1bf620107282db58bb4bcb7d&#13;
+&#13;
+If not, you can find the Group Manager via the (above URL) and reach out to them directly, to have the membership updated.</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function (engine) {
+
+    // Add your code here
+
+})(engine);]]></script>
+        <short_description>Users should not be added to a group via update set</short_description>
+        <sys_class_name>scan_table_check</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-05-04 15:09:44</sys_created_on>
+        <sys_id>670c94a61ba2651404c34150f54bcbbc</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Assignment user to group</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_table_check_670c94a61ba2651404c34150f54bcbbc</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:51:31</sys_updated_on>
+        <table>sys_user_grmember</table>
+        <use_manifest>false</use_manifest>
+    </scan_table_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d614a8a650000001</claim_timestamp>
+        <metadata_update_name>scan_table_check_670c94a61ba2651404c34150f54bcbbc</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:51:31</sys_created_on>
+        <sys_id>1eba9ece874042507bd12fce8bbb359e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:51:31</sys_updated_on>
+    </sys_claim>
+</record_update>

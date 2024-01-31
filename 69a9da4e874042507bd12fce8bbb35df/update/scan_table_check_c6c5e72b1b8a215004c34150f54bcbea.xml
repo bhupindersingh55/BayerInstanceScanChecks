@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_table_check">
+    <scan_table_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced>false</advanced>
+        <attributes/>
+        <category>user_experience</category>
+        <conditions table="label">viewable_by=everyone^global=false^EQ<item display_value="Everyone" endquery="false" field="viewable_by" goto="false" newquery="false" operator="=" or="false" value="everyone"/>
+            <item endquery="false" field="global" goto="false" newquery="false" operator="=" or="false" value="false"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </conditions>
+        <description>Public tags are not visible to everyone on the forms. The issue is happens if the 'Global' field is set to 'false' in the label_entry record for the particular tag in question.</description>
+        <documentation_url>https://support.servicenow.com/kb?id=kb_article_view&amp;sysparm_article=KB0783711</documentation_url>
+        <finding_type>scan_finding</finding_type>
+        <name>Public tags are not visible to everyone</name>
+        <priority>3</priority>
+        <resolution_details>1) Go to the label table.&#13;
+2) Search for the tag you created.&#13;
+3) Add "Global" field on "label" form to the list view.&#13;
+4) Change the 'Global' field to 'True'</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function (finding, current) {
+
+    // Add your code here
+
+})(finding, current);]]></script>
+        <short_description>Public tags are not visible to everyone</short_description>
+        <sys_class_name>scan_table_check</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-04-13 11:53:37</sys_created_on>
+        <sys_id>c6c5e72b1b8a215004c34150f54bcbea</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Public tags are not visible to everyone</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_table_check_c6c5e72b1b8a215004c34150f54bcbea</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:31</sys_updated_on>
+        <table>label</table>
+        <use_manifest>false</use_manifest>
+    </scan_table_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d6149a0950000001</claim_timestamp>
+        <metadata_update_name>scan_table_check_c6c5e72b1b8a215004c34150f54bcbea</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:31</sys_created_on>
+        <sys_id>b37a16ce874042507bd12fce8bbb3560</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:31</sys_updated_on>
+    </sys_claim>
+</record_update>

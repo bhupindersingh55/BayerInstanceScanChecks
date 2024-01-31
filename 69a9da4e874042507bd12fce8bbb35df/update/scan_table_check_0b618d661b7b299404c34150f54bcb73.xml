@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_table_check">
+    <scan_table_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced>false</advanced>
+        <attributes/>
+        <category>manageability</category>
+        <conditions table="sysevent_email_action">category=c97d83137f4432005f58108c3ffa917a^EQ<item display_table="sys_notification_category" display_value="Uncategorized" endquery="false" field="category" goto="false" newquery="false" operator="=" or="false" value="c97d83137f4432005f58108c3ffa917a"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </conditions>
+        <description>Email notification categories allow to identify and group related notifications that are listed in the notification settings for users. A notification, if active and subscribable, is listed in the selected Category in the notification preferences for each user (Notifications tab in the System Settings window).&#13;
+&#13;
+Do not leave the category as Uncategorized, as users may not be able to find the notification in their list of notifications.</description>
+        <documentation_url>https://docs.servicenow.com/bundle/utah-platform-administration/page/administer/notification/task/t_CreateANotification.html</documentation_url>
+        <finding_type>scan_finding</finding_type>
+        <name>Avoid using Uncategorized notification category</name>
+        <priority>3</priority>
+        <resolution_details>When creating notification [sysevent_email_action], set the "Category" field value other than "Uncategorized" and pickup existing category. Existing notification categories would mostly suffice the purpose. &#13;
+&#13;
+However, new notification categories may also be created after discussing with ServiceNow platform team. This update is relevant for Architectural Approval. If not already done, please contact SNOWAA_Bayer_Platform_Architects@bayer.com to seek approval. &#13;
+&#13;
+To create new notification category&#13;
+Navigate to All &gt; System Notification &gt; Email &gt; Notification Categories.</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function (engine) {
+
+    // Add your code here
+
+})(engine);]]></script>
+        <short_description>Avoid using Uncategorized notification category</short_description>
+        <sys_class_name>scan_table_check</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-07-05 21:14:11</sys_created_on>
+        <sys_id>0b618d661b7b299404c34150f54bcb73</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>Avoid using Uncategorized notification category</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_table_check_0b618d661b7b299404c34150f54bcb73</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:51:34</sys_updated_on>
+        <table>sysevent_email_action</table>
+        <use_manifest>false</use_manifest>
+    </scan_table_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d614a974e0000001</claim_timestamp>
+        <metadata_update_name>scan_table_check_0b618d661b7b299404c34150f54bcb73</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:51:34</sys_created_on>
+        <sys_id>43badece874042507bd12fce8bbb35d5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:51:34</sys_updated_on>
+    </sys_claim>
+</record_update>

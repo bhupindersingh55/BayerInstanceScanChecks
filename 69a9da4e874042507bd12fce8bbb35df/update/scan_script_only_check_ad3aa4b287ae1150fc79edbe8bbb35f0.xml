@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_script_only_check">
+    <scan_script_only_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <attributes/>
+        <category>manageability</category>
+        <description>In general, for a single record only a few Workflow context will be running. If a high number of Workflow context are active, this often indicates an issue on the starting conditions of your Workflow. More then 10 active Workflow context is considered being a high number.</description>
+        <documentation_url/>
+        <finding_type>scan_finding</finding_type>
+        <name>High number of workflows running for a single record</name>
+        <priority>2</priority>
+        <resolution_details>Resolve the high number of triggered Workflow context and investigate the starting conditions of your Workflow and correct where necessary.</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function (engine) {
+
+ // Count record
+ var countRecord = new GlideAggregate('wf_context');
+ countRecord.addEncodedQuery('active=true^state=executing');
+ countRecord.groupBy('id');
+ countRecord.addAggregate('COUNT');
+ countRecord._query();
+
+ while(countRecord._next()) {
+  if(countRecord.getAggregate('COUNT') > 10) {
+   // Get record
+   var getRecord = new GlideRecord('wf_context');
+   getRecord.addQuery('id', countRecord.id);
+   getRecord.setLimit(1);
+   getRecord._query();
+
+   if(getRecord._next()) {
+    // Create scan finding
+    var createFinding = new GlideRecord(getRecord.getValue('table'));
+
+    if(createFinding.get(getRecord.getValue('id'))) {
+     engine.finding.setCurrentSource(createFinding);
+     engine.finding.increment();
+    }
+   }
+  }
+ }
+
+})(engine);]]></script>
+        <short_description>High number of workflows running for a single record</short_description>
+        <sys_class_name>scan_script_only_check</sys_class_name>
+        <sys_created_by>GIYYH</sys_created_by>
+        <sys_created_on>2022-10-18 14:38:55</sys_created_on>
+        <sys_id>ad3aa4b287ae1150fc79edbe8bbb35f0</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>High number of workflows running for a single record</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_script_only_check_ad3aa4b287ae1150fc79edbe8bbb35f0</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:30</sys_updated_on>
+    </scan_script_only_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d61499ae40000001</claim_timestamp>
+        <metadata_update_name>scan_script_only_check_ad3aa4b287ae1150fc79edbe8bbb35f0</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:30</sys_created_on>
+        <sys_id>177a16ce874042507bd12fce8bbb3506</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:30</sys_updated_on>
+    </sys_claim>
+</record_update>

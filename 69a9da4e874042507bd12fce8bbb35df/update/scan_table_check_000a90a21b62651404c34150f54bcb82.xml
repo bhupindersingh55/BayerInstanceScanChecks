@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_table_check">
+    <scan_table_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced>false</advanced>
+        <attributes/>
+        <category>manageability</category>
+        <conditions/>
+        <description>Adding roles to the groups in non-production instance is not recommended. </description>
+        <documentation_url>https://bayersi.service-now.com/sp?id=sc_cat_item&amp;sys_id=85ecaa8edbb9f300cf7cd7b7f4961978</documentation_url>
+        <finding_type>scan_finding</finding_type>
+        <name>Assignment role to group</name>
+        <priority>2</priority>
+        <resolution_details>Please remove the role assignment from the update set. If access is needed on production, you can request a new Group with according role(s) (check out link in more information) or update an existing one via Non-Standard Service Request (below is the link)-&#13;
+&#13;
+https://bayersi.service-now.com/sp?id=sc_cat_item&amp;sys_id=435c15ca1b4914d08ca5642d7b4bcbcf</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function (engine) {
+
+    // Add your code here
+
+})(engine);]]></script>
+        <short_description>Roles should be assigned per instance and bot be staged</short_description>
+        <sys_class_name>scan_table_check</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-05-04 15:00:45</sys_created_on>
+        <sys_id>000a90a21b62651404c34150f54bcb82</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>Assignment role to group</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_table_check_000a90a21b62651404c34150f54bcb82</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:51:35</sys_updated_on>
+        <table>sys_group_has_role</table>
+        <use_manifest>false</use_manifest>
+    </scan_table_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d614a9aee0000001</claim_timestamp>
+        <metadata_update_name>scan_table_check_000a90a21b62651404c34150f54bcb82</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:51:35</sys_created_on>
+        <sys_id>dfba1202878042507bd12fce8bbb3508</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:51:35</sys_updated_on>
+    </sys_claim>
+</record_update>

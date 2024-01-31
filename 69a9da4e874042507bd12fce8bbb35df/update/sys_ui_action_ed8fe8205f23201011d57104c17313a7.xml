@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_action">
+    <sys_ui_action action="INSERT_OR_UPDATE">
+        <action_name/>
+        <active>false</active>
+        <client>true</client>
+        <client_script_v2><![CDATA[function onClick(g_form) {
+
+}]]></client_script_v2>
+        <comments/>
+        <condition>GlideStringUtil.notNil(current.getValue("base_update_set")) &amp;&amp; (gs.hasRole("admin") || gs.hasRole("scan_user")) &amp;&amp; g_scratchpad.batch == true</condition>
+        <form_action>true</form_action>
+        <form_button>false</form_button>
+        <form_button_v2>false</form_button_v2>
+        <form_context_menu>false</form_context_menu>
+        <form_link>true</form_link>
+        <form_menu_button_v2>false</form_menu_button_v2>
+        <form_style/>
+        <format_for_configurable_workspace>false</format_for_configurable_workspace>
+        <hint/>
+        <isolate_script>true</isolate_script>
+        <list_action>false</list_action>
+        <list_banner_button>false</list_banner_button>
+        <list_button>false</list_button>
+        <list_choice>false</list_choice>
+        <list_context_menu>false</list_context_menu>
+        <list_link>false</list_link>
+        <list_save_with_form_button>false</list_save_with_form_button>
+        <list_style/>
+        <messages/>
+        <name>Scan Update Set Batch</name>
+        <onclick>initUpdateSetBatchScan()</onclick>
+        <order>100</order>
+        <script><![CDATA[// function initUpdateSetBatchScan() {	
+// 	var ga = new GlideAjax('ScanAjaxProcessor');
+// 	var sysId = (typeof rowSysId == 'undefined')? g_form.getUniqueValue() : rowSysId;
+// 	var tableName = g_form.getTableName();
+// 	ga.addParam('sysparm_sys_id', sysId);
+// 	ga.addParam('sysparm_name', 'executeUpdateSetBatchScan');
+// 	ga.getXML(renderProgress);
+// }
+
+// function renderProgress(response) {
+// 	ScriptLoader.getScripts('/scripts/ScanProgressViewerUtil.js', function() {
+// 		var scanTitle = new GwtMessage().getMessage('Execute Update Set Batch Scan');
+// 		var hspvUtil = new ScanProgressViewerUtil();
+// 		hspvUtil.renderProgress(response, scanTitle);
+// 	});
+// }
+
+function initUpdateSetBatchScan() {
+	var batchUpdateSetSysIDs = g_scratchpad.batchupdatesets;
+    collectUsageMetric('suite_ui_scan_update_set');
+    var ga = new GlideAjax('ScanAjaxProcessor');
+    ga.addParam('sysparm_suite_sys_id', g_scratchpad.scansuiteid); // sys_id of the scan suite containing checks 
+    ga.addParam('sysparm_target_table', 'sys_update_set');
+    ga.addParam('sysparm_target_sys_ids', JSON.stringify(batchUpdateSetSysIDs));
+    ga.addParam('sysparm_name', 'executeSuiteScanWithTargets');
+    ga.getXML(renderProgress);
+}
+
+function collectUsageMetric(event) {
+    var ga = new GlideAjax('ScanAjaxProcessor');
+    ga.addParam('sysparm_metric_event', event);
+    ga.addParam('sysparm_name', 'collectUsageMetricWithParam');
+    ga.getXML();
+}
+
+function renderProgress(response) {
+    ScriptLoader.getScripts('/scripts/ScanProgressViewerUtil.js', function() {
+        var scanTitle = new GwtMessage().getMessage('Execute Update Set Scan');
+        var hspvUtil = new ScanProgressViewerUtil();
+        hspvUtil.renderProgress(response, scanTitle);
+    });
+}
+]]></script>
+        <show_insert>false</show_insert>
+        <show_multiple_update>false</show_multiple_update>
+        <show_query>false</show_query>
+        <show_update>true</show_update>
+        <sys_class_name>sys_ui_action</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-04-12 19:45:07</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>ed8fe8205f23201011d57104c17313a7</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_name>Scan Update Set Batch</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Instance Scan" source="com.glide.instance_scan">aaea78f3db330010479f3852f3961952</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>sys_ui_action_ed8fe8205f23201011d57104c17313a7</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:51:35</sys_updated_on>
+        <table>sys_update_set</table>
+        <ui11_compatible>true</ui11_compatible>
+        <ui16_compatible>false</ui16_compatible>
+    </sys_ui_action>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d614a983d0000001</claim_timestamp>
+        <metadata_update_name>sys_ui_action_ed8fe8205f23201011d57104c17313a7</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:51:35</sys_created_on>
+        <sys_id>c7badece874042507bd12fce8bbb35e3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:51:35</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d614a983c0000001</claim_timestamp>
+        <metadata_update_name>sys_ui_action_ed8fe8205f23201011d57104c17313a7</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.instance_scan</previous_claim_name>
+        <previous_claim_scope>com.glide.instance_scan</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:51:35</sys_created_on>
+        <sys_id>8bbadece874042507bd12fce8bbb35e3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:51:35</sys_updated_on>
+    </sys_claim>
+</record_update>

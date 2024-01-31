@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_relationship">
+    <sys_relationship action="INSERT_OR_UPDATE">
+        <advanced>false</advanced>
+        <apply_to/>
+        <basic_apply_to>sys_update_set</basic_apply_to>
+        <basic_query_from>scan_result</basic_query_from>
+        <insert_callback/>
+        <name>Instance Scan</name>
+        <query_from/>
+        <query_with><![CDATA[(function refineQuery(current, parent) {
+
+    var comboArr = [];
+    var scanTarget = new GlideRecord('scan_target');
+    scanTarget.addQuery('record_id', parent.sys_id);
+    scanTarget.query();
+    if (scanTarget.next()) {
+        var grCombo = new GlideRecord('scan_combo');
+        grCombo.addEncodedQuery('targetsLIKE' + scanTarget.sys_id);
+        grCombo.query();
+        while (grCombo.next()) {
+            comboArr.push(grCombo.sys_id.toString());
+        }
+        var comboStr = comboArr.join();
+    }
+    current.addQuery('combo', 'IN', comboStr);
+
+})(current, parent);]]></query_with>
+        <reference_field/>
+        <related_list/>
+        <simple_reference>false</simple_reference>
+        <sys_class_name>sys_relationship</sys_class_name>
+        <sys_created_by>GIYYH</sys_created_by>
+        <sys_created_on>2023-01-17 15:48:12</sys_created_on>
+        <sys_id>8292ed4887246d507bd12fce8bbb35f4</sys_id>
+        <sys_mod_count>42</sys_mod_count>
+        <sys_name>Instance Scan</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>sys_relationship_8292ed4887246d507bd12fce8bbb35f4</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:26</sys_updated_on>
+    </sys_relationship>
+    <sys_translated_text action="delete_multiple" query="documentkey=8292ed4887246d507bd12fce8bbb35f4"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d61498aa80000001</claim_timestamp>
+        <metadata_update_name>sys_relationship_8292ed4887246d507bd12fce8bbb35f4</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:26</sys_created_on>
+        <sys_id>5a7ad2ce874042507bd12fce8bbb350a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:26</sys_updated_on>
+    </sys_claim>
+</record_update>

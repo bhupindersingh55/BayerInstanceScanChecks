@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_grid_canvas_pane">
+    <sys_grid_canvas_pane action="INSERT_OR_UPDATE">
+        <grid_canvas display_value="PA DevBest Practices Mo - New Tab">6e0cb6091b7ae95404c34150f54bcbd3</grid_canvas>
+        <height>9</height>
+        <portal_widget display_value="Created 2023-05-12 23:41:17">5962c3c5873221107bd12fce8bbb35ca</portal_widget>
+        <posx>10</posx>
+        <posy>0</posy>
+        <sys_class_name>sys_grid_canvas_pane</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-05-12 21:41:17</sys_created_on>
+        <sys_id>d562c3c5873221107bd12fce8bbb35d1</sys_id>
+        <sys_mod_count>20</sys_mod_count>
+        <sys_name>6e0cb6091b7ae95404c34150f54bcbd3</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>sys_grid_canvas_pane_d562c3c5873221107bd12fce8bbb35d1</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:51:30</sys_updated_on>
+        <width>2</width>
+    </sys_grid_canvas_pane>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d614a864c0000001</claim_timestamp>
+        <metadata_update_name>sys_grid_canvas_pane_d562c3c5873221107bd12fce8bbb35d1</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:51:30</sys_created_on>
+        <sys_id>06ba9ece874042507bd12fce8bbb355b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:51:30</sys_updated_on>
+    </sys_claim>
+</record_update>

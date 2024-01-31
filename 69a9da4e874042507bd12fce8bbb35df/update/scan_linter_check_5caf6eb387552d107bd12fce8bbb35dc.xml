@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_linter_check">
+    <scan_linter_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <attributes/>
+        <category>manageability</category>
+        <description>Synchronous AJAX call typically holds the user screen to perform additional activity until GlideAjax response is received</description>
+        <documentation_url>https://docs.servicenow.com/en-US/bundle/utah-application-development/page/script/ajax/topic/p_AJAX.html#d58124e354</documentation_url>
+        <finding_type>scan_finding</finding_type>
+        <name>Avoid synchronous AJAX call in client scripts</name>
+        <priority>3</priority>
+        <resolution_details>If your use case demands that no further processing can occur until the GlideAjax response has been received, you can use getXMLWait(). However, because this will slow down your code and lock the user session until the response is received, it is generally recommended that you use getXML() with a callback function.</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function(engine) {
+
+    engine.rootNode.visit(function(node) {
+        if (node.getTypeName() === "NAME" &&
+            node.getNameIdentifier() === "getXMLWait" &&
+            node.getParent().getTypeName() === "GETPROP" &&
+            node.getParent().getParent().getTypeName() === "CALL") {
+            engine.finding.incrementWithNode(node);
+        }
+    });
+
+})(engine);]]></script>
+        <short_description>Avoid synchronous AJAX call in client scripts</short_description>
+        <sys_class_name>scan_linter_check</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-03-07 19:51:00</sys_created_on>
+        <sys_id>5caf6eb387552d107bd12fce8bbb35dc</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>Avoid synchronous AJAX call in client scripts</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_linter_check_5caf6eb387552d107bd12fce8bbb35dc</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:37</sys_updated_on>
+    </scan_linter_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d6149b59c0000001</claim_timestamp>
+        <metadata_update_name>scan_linter_check_5caf6eb387552d107bd12fce8bbb35dc</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:37</sys_created_on>
+        <sys_id>458a56ce874042507bd12fce8bbb35e2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:37</sys_updated_on>
+    </sys_claim>
+</record_update>

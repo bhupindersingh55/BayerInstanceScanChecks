@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_linter_check">
+    <scan_linter_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <attributes/>
+        <category>manageability</category>
+        <description>Client Scripts without a function cause issues with variable scope. This is why Client Scripts are enclosed in a function by default. When code is not enclosed in a function, variables and other objects are available and shared to all other client-side scripts. If you're using the same variable names, it is possible they could collide.</description>
+        <documentation_url>https://developer.servicenow.com/dev.do#!/guides/sandiego/now-platform/tpb-guide/client_scripting_technical_best_practices#enclose-code-in-functions</documentation_url>
+        <finding_type>scan_finding</finding_type>
+        <name>Enclose code in functions</name>
+        <priority>3</priority>
+        <resolution_details>Client Scripts without a function cause issues with variable scope. This is why Client Scripts are enclosed in a function by default. When code is not enclosed in a function, variables and other objects are available and shared to all other client-side scripts. If you're using the same variable names, it is possible they could collide. This can lead to unexpected consequences that are difficult to troubleshoot. Consider this example:
+
+******************************************************************************************
+var state = "6";
+function onSubmit() {
+   if(g_form.getValue('incident_state') == state) {
+     alert("This incident is Resolved");
+   }
+}
+
+******************************************************************************************
+Because the state variable is not enclosed in a function, all client-side scripts, have access to it. Other scripts may also use the common variable name state. The duplicate names can conflict and lead to unexpected results. These issues are very difficult to isolate and resolve. To avoid this issue, ensure all your code is wrapped in a function:
+
+******************************************************************************************
+function onSubmit() {
+   var state = "6";
+   if(g_form.getValue('incident_state') == state) {
+     alert("This incident is Resolved");
+   }
+}
+
+******************************************************************************************
+This solution is much safer because the scope of the variable state is limited to the onSubmit() function. Therefore, the state variable does not conflict with state variables in other client-side scripts.</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function(engine) {
+
+    engine.rootNode.visit(function(node) {
+        if (node.getNameIdentifier() &&
+            node.getTypeName() === 'NAME' &&
+            (node.getNameIdentifier() === 'onSubmit' || node.getNameIdentifier() === 'onLoad'|| node.getNameIdentifier() === 'onChange'|| node.getNameIdentifier() === 'onCellEdit')) {
+            engine.rootNode.visit(function(node) {
+                if (node.getTypeName() === 'VAR' &&
+                    node.getParent().getTypeName() === 'SCRIPT') {
+                    engine.finding.incrementWithNode(node);
+                }
+            });
+        }
+    });
+
+})(engine);]]></script>
+        <short_description>Enclose code in functions</short_description>
+        <sys_class_name>scan_linter_check</sys_class_name>
+        <sys_created_by>GIYYH</sys_created_by>
+        <sys_created_on>2022-10-18 14:38:54</sys_created_on>
+        <sys_id>2d3aa4b287ae1150fc79edbe8bbb35b3</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>Enclose code in functions</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_linter_check_2d3aa4b287ae1150fc79edbe8bbb35b3</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:34</sys_updated_on>
+    </scan_linter_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d6149acd60000001</claim_timestamp>
+        <metadata_update_name>scan_linter_check_2d3aa4b287ae1150fc79edbe8bbb35b3</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:34</sys_created_on>
+        <sys_id>ec8a56ce874042507bd12fce8bbb351d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:34</sys_updated_on>
+    </sys_claim>
+</record_update>

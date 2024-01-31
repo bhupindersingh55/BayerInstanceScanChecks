@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_linter_check">
+    <scan_linter_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <attributes/>
+        <category>manageability</category>
+        <description>Avoid Document Object Model (DOM) manipulation if possible. It can cause a maintainability issue when browsers are updated.</description>
+        <documentation_url>https://docs.servicenow.com/bundle/sandiego-application-development/page/script/client-scripts/concept/client-script-best-practices.html#r_AvoidDOMManipulation</documentation_url>
+        <finding_type>scan_finding</finding_type>
+        <name>Avoid DOM manipulation</name>
+        <priority>2</priority>
+        <resolution_details>Avoid Document Object Model (DOM) manipulation if possible. It can cause a maintainability issue when browsers are updated.
+
+Instead, use the GlideForm API or consider a different approach for the solution. In general, when using DOM manipulation methods, you have to reference an element in the DOM by ID or using a CSS selector. When referencing out-of-box DOM elements, there is a risk that the element ID or placement within the DOM could change, causing the code to stop working and/or generate errors. Use forethought, caution, and have a full understanding of the risk you are incurring. Review these objects and reduce the use of DOM manipulation methods as much as possible.</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function(engine) {
+
+    engine.rootNode.visit(function(node) {
+        if (node.getNameIdentifier() &&
+            node.getTypeName() === 'NAME' &&
+            node.getParent().getTypeName() === 'GETPROP' &&
+            node.getParent().getParent().getTypeName() === 'CALL' &&
+            (node.getNameIdentifier() === 'document')) {
+            node.getParent().visit(function(node) {
+                if (node.getNameIdentifier() &&
+                    node.getTypeName() === 'NAME' &&
+                    node.getNameIdentifier() !== 'document') {
+                    engine.finding.incrementWithNode(node);
+                }
+            });
+        }
+    });
+
+})(engine);]]></script>
+        <short_description>Avoid DOM manipulation</short_description>
+        <sys_class_name>scan_linter_check</sys_class_name>
+        <sys_created_by>GIYYH</sys_created_by>
+        <sys_created_on>2022-10-18 14:38:54</sys_created_on>
+        <sys_id>213aa4b287ae1150fc79edbe8bbb35bc</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>Avoid DOM manipulation</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_linter_check_213aa4b287ae1150fc79edbe8bbb35bc</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:26</sys_updated_on>
+    </scan_linter_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d61498dc50000001</claim_timestamp>
+        <metadata_update_name>scan_linter_check_213aa4b287ae1150fc79edbe8bbb35bc</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:26</sys_created_on>
+        <sys_id>e27ad2ce874042507bd12fce8bbb352d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:26</sys_updated_on>
+    </sys_claim>
+</record_update>

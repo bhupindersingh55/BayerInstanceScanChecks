@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_table_check">
+    <scan_table_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced>true</advanced>
+        <attributes/>
+        <category>performance</category>
+        <conditions table="sys_ui_list">nameNOT LIKEimport^EQ<item endquery="false" field="name" goto="false" newquery="false" operator="NOT LIKE" or="false" value="import"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </conditions>
+        <description>Number of fields displayed in list layout i.e. when viewing the form/table data in list view then number of fields in the view should not exceed 16 as this may impact the instance performance.</description>
+        <documentation_url>https://docs.servicenow.com/bundle/sandiego-platform-administration/page/administer/list-administration/task/t_ConfigureTheListLayout.html</documentation_url>
+        <finding_type>scan_finding</finding_type>
+        <name>Limit the fields displayed in list layout</name>
+        <priority>3</priority>
+        <resolution_details>Number of fields displayed in list layout i.e. when viewing the form/table data in list view then number of fields in the view should not exceed 16 as this may impact the instance performance.&#13;
+&#13;
+Follow the below steps to fix-&#13;
+&#13;
+1. Navigate to AES&#13;
+2. Click on Data and locate the table for which list layout needs to be updated&#13;
+3. Open the table and click on "Preview" button. This opens the list layout.&#13;
+4. Right click on the list header. Select Configure &gt; List Layout. This opens the sluchbucket page.&#13;
+5. Move some of the fields from "Selected" box to "Available" box.</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function (engine) {
+
+    // Declare variables
+ var tableID = engine.current.getValue("sys_id");
+ 
+ // Count number of fields in the list view
+ var aggListElements = new GlideAggregate('sys_ui_list_element');
+ aggListElements.addQuery('list_id',tableID);
+ aggListElements.addAggregate('COUNT');
+ aggListElements.query();
+ if(aggListElements.next()) {
+  if(aggListElements.getAggregate('COUNT') > 16) {
+   engine.finding.increment();
+  }
+ }
+
+})(engine);]]></script>
+        <short_description>Limit the fields displayed in list layout to 16</short_description>
+        <sys_class_name>scan_table_check</sys_class_name>
+        <sys_created_by>GIYYH</sys_created_by>
+        <sys_created_on>2022-10-18 14:38:54</sys_created_on>
+        <sys_id>653aa4b287ae1150fc79edbe8bbb35c9</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>Limit the fields displayed in list layout</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_table_check_653aa4b287ae1150fc79edbe8bbb35c9</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:28</sys_updated_on>
+        <table>sys_ui_list</table>
+        <use_manifest>false</use_manifest>
+    </scan_table_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d614993a10000001</claim_timestamp>
+        <metadata_update_name>scan_table_check_653aa4b287ae1150fc79edbe8bbb35c9</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:28</sys_created_on>
+        <sys_id>f67ad2ce874042507bd12fce8bbb3587</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:28</sys_updated_on>
+    </sys_claim>
+</record_update>

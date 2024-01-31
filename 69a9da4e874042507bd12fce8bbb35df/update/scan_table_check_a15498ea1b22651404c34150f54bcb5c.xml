@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_table_check">
+    <scan_table_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced>false</advanced>
+        <attributes/>
+        <category>manageability</category>
+        <conditions/>
+        <description>Adding roles to the user accounts in non-production instance is not recommended. </description>
+        <documentation_url>https://bayersi.service-now.com/sp?id=sc_cat_item&amp;sys_id=85ecaa8edbb9f300cf7cd7b7f4961978</documentation_url>
+        <finding_type>scan_finding</finding_type>
+        <name>Assignment role to user</name>
+        <priority>2</priority>
+        <resolution_details>Utilize an existing group or initiate a request for a new group to allocate both the role and the user to a group. Check out the link in more information to request for new group.</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function (engine) {
+
+    // Add your code here
+
+})(engine);]]></script>
+        <short_description> Do not grant access or roles at the individual user level</short_description>
+        <sys_class_name>scan_table_check</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-05-04 14:39:41</sys_created_on>
+        <sys_id>a15498ea1b22651404c34150f54bcb5c</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Assignment role to user</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_table_check_a15498ea1b22651404c34150f54bcb5c</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:51:33</sys_updated_on>
+        <table>sys_user_has_role</table>
+        <use_manifest>false</use_manifest>
+    </scan_table_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d614a92a40000001</claim_timestamp>
+        <metadata_update_name>scan_table_check_a15498ea1b22651404c34150f54bcb5c</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:51:33</sys_created_on>
+        <sys_id>76badece874042507bd12fce8bbb3585</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:51:33</sys_updated_on>
+    </sys_claim>
+</record_update>

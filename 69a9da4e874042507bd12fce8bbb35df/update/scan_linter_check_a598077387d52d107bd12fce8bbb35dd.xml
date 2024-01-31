@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_linter_check">
+    <scan_linter_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <attributes/>
+        <category>performance</category>
+        <description>If a cache flush is triggered as part of a non-ootb script execution this will require the platform to rebuild the cache before returning to its BAU state. This activity has a significant performance impact.</description>
+        <documentation_url>https://www.servicenow.com/community/now-platform-blog/you-don-t-always-need-to-clear-the-cache/ba-p/2281849</documentation_url>
+        <finding_type>scan_finding</finding_type>
+        <name>Cache flushed as part of scripts</name>
+        <priority>2</priority>
+        <resolution_details>Remove any cache flush triggers unless necessary. Recommended is only the pre-defined cache flush actions that are built into out the box solutions.&#13;
+&#13;
+Do not make use of gs.cacheFlush() in scripts.&#13;
+&#13;
+Care should be taken when setting system properties (sys_properties) using this method as it causes a system-wide cache flush. Each flush can cause system degradation while the caches rebuild. If a value must be updated often, it should not be stored as a system property. In general, you should only place values in the sys_properties table that do not frequently change.</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function(engine) {
+
+    engine.rootNode.visit(function(node) {
+        // AST will have the '.' as parent to what we need. Start here and visit child nodes
+        if (node.getTypeName() === "GETPROP") {
+			var gs_found = false;
+			var method_found = false;
+			
+			node.visit(function(childnode) {
+				// now we are child to '.', check if we are gs or setProperty
+				if (childnode.getTypeName() != "NAME") {
+					return;
+				}
+				
+				if (childnode.getNameIdentifier() === "setProperty" || childnode.getNameIdentifier() === "cacheFlush") {
+					method_found = true;
+					return;
+				}
+
+				if (childnode.getNameIdentifier() === "gs") {
+					gs_found = true;
+					return;
+				}
+				
+			});
+			
+			if (gs_found && method_found) {
+				engine.finding.incrementWithNode(node);
+			}
+        }
+    });
+	
+})(engine);]]></script>
+        <short_description>Cache flushed as part of scripts</short_description>
+        <sys_class_name>scan_linter_check</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-03-07 21:38:29</sys_created_on>
+        <sys_id>a598077387d52d107bd12fce8bbb35dd</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Cache flushed as part of scripts</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_linter_check_a598077387d52d107bd12fce8bbb35dd</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:37</sys_updated_on>
+    </scan_linter_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d6149b87f0000001</claim_timestamp>
+        <metadata_update_name>scan_linter_check_a598077387d52d107bd12fce8bbb35dd</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:37</sys_created_on>
+        <sys_id>918a96ce874042507bd12fce8bbb351c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:37</sys_updated_on>
+    </sys_claim>
+</record_update>

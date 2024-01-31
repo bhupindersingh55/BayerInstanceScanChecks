@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_linter_check">
+    <scan_linter_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <attributes/>
+        <category>manageability</category>
+        <description>It is a best practice to use UI policy to make a field mandatory, read-only, visible etc. instead of using a client script.</description>
+        <documentation_url>https://docs.servicenow.com/en-US/bundle/sandiego-platform-administration/page/administer/form-administration/task/t_CreateAUIPolicy.html</documentation_url>
+        <finding_type>scan_finding</finding_type>
+        <name>Use UI Policies instead of g_form API</name>
+        <priority>3</priority>
+        <resolution_details>It is a best practice to use UI policy to make a field mandatory, read-only, visible etc. instead of using a client script.
+
+Create new UI policies to replace or update the client scripts that involves the following methods as part of API call-
+
+setMandatory
+setVisible
+setDisplay
+setReadOnly
+
+Alternatively, if the fields needs to be displayed or hidden based on certain roles than create security rules.</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function(engine) {
+
+    engine.rootNode.visit(function(node) {
+        if (node.getNameIdentifier() &&
+            node.getTypeName() === 'NAME' &&
+            node.getParent().getTypeName() === 'GETPROP' &&
+            (node.getNameIdentifier() === 'setMandatory' || node.getNameIdentifier() === 'setVisible' || node.getNameIdentifier() === 'setDisplay' || node.getNameIdentifier() === 'setReadOnly')) {
+            engine.finding.incrementWithNode(node);
+        }
+    });
+
+})(engine);]]></script>
+        <short_description>Use UI Policies instead of g_form API</short_description>
+        <sys_class_name>scan_linter_check</sys_class_name>
+        <sys_created_by>GIYYH</sys_created_by>
+        <sys_created_on>2022-10-18 14:38:54</sys_created_on>
+        <sys_id>a93aa4b287ae1150fc79edbe8bbb35c1</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>Use UI Policies instead of g_form API</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_linter_check_a93aa4b287ae1150fc79edbe8bbb35c1</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:25</sys_updated_on>
+    </scan_linter_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d6149873d0000001</claim_timestamp>
+        <metadata_update_name>scan_linter_check_a93aa4b287ae1150fc79edbe8bbb35c1</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:25</sys_created_on>
+        <sys_id>4e7a92ce874042507bd12fce8bbb35cc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:25</sys_updated_on>
+    </sys_claim>
+</record_update>

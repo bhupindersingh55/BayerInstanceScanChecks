@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_linter_check">
+    <scan_linter_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <attributes/>
+        <category>security</category>
+        <description>The platform is Javascript and a lot of code is run in a global variable scope.
+
+A "gr" defined in one business rule can clobber another "gr" defined in some other script, which happens to be running as part of the same update or transaction. One 'gr' can be replaced by the other 'gr' for something completely unrelated, and your script will continue running subsequent lines thinking it is the one it defined.
+
+Your script could end up returning no query result, or updating a different record, from even a different table, than the one you have just queried for in your script. That can clearly have serious implications.</description>
+        <documentation_url>https://support.servicenow.com/kb?id=kb_article_view&amp;sysparm_article=KB0713029</documentation_url>
+        <finding_type>scan_finding</finding_type>
+        <name>Do not use gr as a variable name</name>
+        <priority>2</priority>
+        <resolution_details>You could wrap your scripts in a function to avoid your script clobbering another gr, which is why new business rules, calculated fields, etc. mostly now have a default script added to wrap the code to protect the variables within the function, but most scripts and including older business rules don't require this. Wrapping your code in a function is good coding practice, so always do this.
+
+When using more than one GlideRecord in your script, you may also accidentally re-use the gr name. The best practice is to use your own unique variable names, relevant to the table you are using, and never use 'gr'.</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function(engine) {
+
+    engine.rootNode.visit(function(node) {
+        if (node.getTypeName() === "NAME" &&
+            node.getParent().getTypeName() === "VAR" &&
+            node.getNameIdentifier() === "gr") {
+
+            engine.finding.incrementWithNode(node);
+        }
+    });
+
+})(engine);]]></script>
+        <short_description>Do not use gr as a variable name</short_description>
+        <sys_class_name>scan_linter_check</sys_class_name>
+        <sys_created_by>GIYYH</sys_created_by>
+        <sys_created_on>2022-10-18 14:38:55</sys_created_on>
+        <sys_id>f53ae4b287ae1150fc79edbe8bbb350e</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Do not use gr as a variable name</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_linter_check_f53ae4b287ae1150fc79edbe8bbb350e</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:27</sys_updated_on>
+    </scan_linter_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d61498ef20000001</claim_timestamp>
+        <metadata_update_name>scan_linter_check_f53ae4b287ae1150fc79edbe8bbb350e</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:27</sys_created_on>
+        <sys_id>2e7ad2ce874042507bd12fce8bbb353d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:27</sys_updated_on>
+    </sys_claim>
+</record_update>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_script_only_check">
+    <scan_script_only_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <attributes/>
+        <category>manageability</category>
+        <description>ACLs without roles or condition or scripts may allow unintended users to update/delete/create/read records.</description>
+        <documentation_url>https://docs.servicenow.com/bundle/quebec-platform-administration/page/administer/contextual-security/concept/access-control-rules.html</documentation_url>
+        <finding_type>scan_finding</finding_type>
+        <name>ACLs without roles or condition or scripts</name>
+        <priority>2</priority>
+        <resolution_details>Review ACL and do one of the following:
+a) Add required roles or condition or scripts to the ACLs
+b) Disable and validate if ACL is not needed, if after 7 days no issues, take XML backup and delete.</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function (finding) {
+ var updateVersionAPI = new global.UpdateVersionAPI(); // updateVersionAPI to find custom sys_metadata records
+ var aclsGr = new GlideRecord('sys_security_acl');
+  aclsGr.addEncodedQuery('active=true^type=record^conditionISEMPTY^scriptISEMPTY');
+  aclsGr.query();
+ var customACLs = updateVersionAPI.getCustomerFileIds(aclsGr); // Find the ACLs without condition/script.
+ if(customACLs.length > 0){ //custom ACLs without condition/script??
+  for (var i = 0; i < customACLs.length; i++){
+   var aclsRoleGr = new GlideRecord('sys_security_acl_role'); //Check if the ACL has a role defined.
+   aclsRoleGr.addQuery('sys_security_acl',customACLs[i]);
+   aclsRoleGr.setLimit(1);
+         aclsRoleGr.query();
+   if(!aclsRoleGr.next()){ // If the ACL has no role, get the specific ACL GlideRecord and create finding
+    var fACLGr = new GlideRecord('sys_security_acl');
+    fACLGr.get(customACLs[i]);
+    finding.setCurrentSource(fACLGr); 
+    finding.increment();
+   } 
+  }
+ } 
+})(finding);]]></script>
+        <short_description>ACLs without roles or condition or scripts may cause unintended results</short_description>
+        <sys_class_name>scan_script_only_check</sys_class_name>
+        <sys_created_by>GIYYH</sys_created_by>
+        <sys_created_on>2022-10-18 14:38:55</sys_created_on>
+        <sys_id>313aa4b287ae1150fc79edbe8bbb35f9</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>ACLs without roles or condition or scripts</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_script_only_check_313aa4b287ae1150fc79edbe8bbb35f9</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:27</sys_updated_on>
+    </scan_script_only_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d614991b80000001</claim_timestamp>
+        <metadata_update_name>scan_script_only_check_313aa4b287ae1150fc79edbe8bbb35f9</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:27</sys_created_on>
+        <sys_id>7a7ad2ce874042507bd12fce8bbb356a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:27</sys_updated_on>
+    </sys_claim>
+</record_update>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="pa_tabs">
+    <pa_tabs action="INSERT_OR_UPDATE">
+        <canvas_page display_value="PA DevBest Practices Mo - New Tab">6e0cb6091b7ae95404c34150f54bcbd3</canvas_page>
+        <name>DevBest Practices Mo - New Tab</name>
+        <page display_value="PA DevBest Practices Mo - New Tab">2a0cb6091b7ae95404c34150f54bcbd2</page>
+        <sys_class_name>pa_tabs</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-05-12 21:13:31</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>ea0cb6091b7ae95404c34150f54bcbd6</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>DevBest Practices Mo - New Tab</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>pa_tabs_ea0cb6091b7ae95404c34150f54bcbd6</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:51:35</sys_updated_on>
+    </pa_tabs>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d614a98fc0000001</claim_timestamp>
+        <metadata_update_name>pa_tabs_ea0cb6091b7ae95404c34150f54bcbd6</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:51:35</sys_created_on>
+        <sys_id>97badece874042507bd12fce8bbb35ed</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:51:35</sys_updated_on>
+    </sys_claim>
+</record_update>

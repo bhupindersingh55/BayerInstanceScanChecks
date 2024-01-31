@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="316fccdc1b423010827b1065bb4bcb8e" label="Комбинированное" max_length="40" name="scan_combo" type="collection">
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Targets" max_length="1024" name="targets" reference="scan_target" type="glide_list"/>
+    </element>
+</database>

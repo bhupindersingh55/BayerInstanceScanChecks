@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="short_description" label="简短描述" language="zh" table="scan_check">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>short_description</element>
+            <help/>
+            <hint/>
+            <label>简短描述</label>
+            <language>zh</language>
+            <name>scan_check</name>
+            <plural>简短描述</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>GDZSY</sys_created_by>
+            <sys_created_on>2020-10-17 13:32:24</sys_created_on>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_name>简短描述</sys_name>
+            <sys_package display_value="I18N: Simplified Chinese Translations" source="com.snc.i18n.chinese">b0f0a79f1bb71894edda33799b4bcb98</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+            <sys_update_name>sys_documentation_scan_check_short_description_zh</sys_update_name>
+            <sys_updated_by>EGMCF</sys_updated_by>
+            <sys_updated_on>2024-01-31 20:50:40</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d6149c2dd0000001</claim_timestamp>
+        <metadata_update_name>sys_documentation_scan_check_short_description_zh</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:40</sys_created_on>
+        <sys_id>fd8a96ce874042507bd12fce8bbb35fb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:40</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d6149c2dc0000001</claim_timestamp>
+        <metadata_update_name>sys_documentation_scan_check_short_description_zh</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.i18n.chinese</previous_claim_name>
+        <previous_claim_scope>com.snc.i18n.chinese</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:40</sys_created_on>
+        <sys_id>b18a96ce874042507bd12fce8bbb35fc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:40</sys_updated_on>
+    </sys_claim>
+</record_update>

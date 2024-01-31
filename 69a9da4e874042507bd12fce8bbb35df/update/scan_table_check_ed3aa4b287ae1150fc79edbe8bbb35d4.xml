@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_table_check">
+    <scan_table_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced>true</advanced>
+        <attributes/>
+        <category>manageability</category>
+        <conditions table="sys_security_acl">active=true^type=record^EQ<item endquery="false" field="active" goto="false" newquery="false" operator="=" or="false" value="true"/>
+            <item display_table="sys_security_type" display_value="record" endquery="false" field="type" goto="false" newquery="false" operator="=" or="false" value="record"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </conditions>
+        <description>ACLs without roles or condition or scripts may allow unintended users to update/delete/create/read records.</description>
+        <documentation_url/>
+        <finding_type>scan_finding</finding_type>
+        <name>ACLs without roles or condition or scripts</name>
+        <priority>2</priority>
+        <resolution_details>Review ACL and do one of the following:
+a) Add required roles or condition or scripts to the ACLs
+b) Disable and validate if ACL is not needed, if after 7 days no issues, take XML backup and delete.</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function(engine) {
+
+    // Get current ACL
+    var grACL = new GlideRecord('sys_security_acl');
+    if (grACL.get(engine.current.sys_id)) {
+        if (engine.current.script == '' && engine.current.condition == '') { // If ACL without condition/script
+            var aclsRoleGr = new GlideRecord('sys_security_acl_role'); //Check if the ACL has a role defined.
+            aclsRoleGr.addQuery('sys_security_acl', grACL.sys_id);
+            aclsRoleGr.setLimit(1);
+            aclsRoleGr.query();
+            if (!aclsRoleGr.next()) { // If the ACL has no role, get the specific ACL GlideRecord and create finding
+                engine.finding.increment();
+            }
+        }
+    }
+
+
+})(engine);]]></script>
+        <short_description>ACLs without roles or condition or scripts may cause unintended results</short_description>
+        <sys_class_name>scan_table_check</sys_class_name>
+        <sys_created_by>GIYYH</sys_created_by>
+        <sys_created_on>2022-10-18 14:38:55</sys_created_on>
+        <sys_id>ed3aa4b287ae1150fc79edbe8bbb35d4</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>ACLs without roles or condition or scripts</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_table_check_ed3aa4b287ae1150fc79edbe8bbb35d4</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:29</sys_updated_on>
+        <table>sys_security_acl</table>
+        <use_manifest>false</use_manifest>
+    </scan_table_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d6149998a0000001</claim_timestamp>
+        <metadata_update_name>scan_table_check_ed3aa4b287ae1150fc79edbe8bbb35d4</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:29</sys_created_on>
+        <sys_id>db7ad2ce874042507bd12fce8bbb35f1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:29</sys_updated_on>
+    </sys_claim>
+</record_update>

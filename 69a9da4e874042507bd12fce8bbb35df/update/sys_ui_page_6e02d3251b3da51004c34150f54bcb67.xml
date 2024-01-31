@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[function loadScanResults(category) {
+
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+	
+    var categories = document.getElementsByClassName("categories")[0].getElementsByTagName("li");
+    for (var i = 0; i < categories.length; i++) {
+        categories[i].classList.remove("selected");
+    }
+    document.querySelector('.categories li[data-category=' + category + ']').classList.add("selected");
+
+    var scanAjax = new GlideAjax('BayerInstanceScanUtilClient');
+    scanAjax.addParam('sysparm_name', 'getScanResults');
+    scanAjax.addParam('sysparm_scanCategory', category);
+    scanAjax.getXML(processScanResults);
+}
+
+function processScanResults(response) {
+    var answer = response.responseXML.documentElement.getAttribute("answer");
+    answer = JSON.parse(answer);
+
+    // remove all conatiner html elements before displaying new category results
+    removeElements("container");
+	// get content element to append new html elements as child
+    var contentDiv = document.getElementById("scan_content");
+
+    for (var i = 0; i < answer.length; i++) {
+        var containerDiv = document.createElement('div');
+        containerDiv.className = 'container';
+        containerDiv.setAttribute("id", "scan_container");
+        var sectionDiv = document.createElement('div');
+        sectionDiv.className = 'section';
+        sectionDiv.setAttribute("id", "scan_section");
+        var descriptionDiv = document.createElement('p');
+        descriptionDiv.className = 'description';
+        descriptionDiv.setAttribute("id", "scan_description");
+        var titleDiv = document.createElement('h1');
+        titleDiv.className = 'title';
+        titleDiv.setAttribute("id", "scan_title");
+        var resolutionDiv = document.createElement('p');
+        resolutionDiv.className = 'resolution';
+        resolutionDiv.setAttribute("id", "scan_resolution");
+        var scanRecordDiv = document.createElement('p');
+        scanRecordDiv.className = 'source';
+        scanRecordDiv.setAttribute("id", "scan_source_record");
+        var scanRecordLinkDiv = document.createElement('a');
+        scanRecordLinkDiv.className = '.source a';
+        scanRecordLinkDiv.setAttribute("id", "scan_record_link");
+        scanRecordLinkDiv.setAttribute("target", "_blank");
+        scanRecordLinkDiv.setAttribute("href", "scan_check.do?sys_id=" + answer[i].scanSysID);
+        var sourceDiv = document.createElement('p');
+        sourceDiv.className = 'source';
+        sourceDiv.setAttribute("id", "scan_source");
+
+        // set the structure of html page
+        document.body.appendChild(contentDiv);
+        contentDiv.appendChild(containerDiv);
+        containerDiv.appendChild(sectionDiv);
+        sectionDiv.appendChild(titleDiv);
+        sectionDiv.appendChild(descriptionDiv);
+        sectionDiv.appendChild(resolutionDiv);
+        sectionDiv.appendChild(scanRecordDiv);
+        sectionDiv.appendChild(sourceDiv);
+
+        // add content to html elements
+        titleDiv.innerText = answer[i].scanTitle;
+        descriptionDiv.innerText = answer[i].scanDescription;
+        if (answer[i].scanResolution)
+            resolutionDiv.innerHTML = "<b>Resolution:  </b>" + answer[i].scanResolution;
+        scanRecordDiv.innerText = "Scan Record:  ";
+        scanRecordDiv.appendChild(scanRecordLinkDiv);
+        scanRecordLinkDiv.innerText = answer[i].scanName;
+
+        // create source link only when documentation url exists
+        if (answer[i].scanURL != "") {
+            sourceDiv.innerHTML = "More Information:  ";
+            var sourceLinkDiv = document.createElement('a');
+            sourceLinkDiv.className = '.source a';
+            sourceLinkDiv.setAttribute("id", "scan_source_link");
+            sourceLinkDiv.setAttribute("target", "_blank");
+            sourceLinkDiv.setAttribute("href", answer[i].scanURL);
+            sourceDiv.appendChild(sourceLinkDiv);
+            sourceLinkDiv.innerText = answer[i].scanURL;
+        }
+    }
+
+    function removeElements(className) {
+        var allElements = document.querySelectorAll("." + className);
+        for (var a = 0; a < allElements.length; a++) {
+            allElements[a].remove();
+        }
+    }
+}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint/>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly
+    trim="false"
+    xmlns:j="jelly:core"
+    xmlns:g="glide"
+    xmlns:j2="null"
+    xmlns:g2="null"
+>
+    <style>
+        .heading {
+            background: #F7FAFC;
+            top: 0;
+            width: 100%;
+            padding: 5px 220px;
+            text-align: center;
+			position: fixed;
+        }
+		.content {
+            padding: 1px;
+            margin-left: 100px;
+			margin-bottom:220px;
+			margin-top:100px;
+        }
+		 .heading + .content {
+            padding-top: 100px;
+        }	
+		.container {
+		    display: flex;
+            flex-direction: column;
+			flex-wrap: wrap;
+            gap: 2px;
+<!--             padding-left: 200px;
+            margin-left: 180px;
+            margin-right: 20px; -->
+			padding-left: 20%;
+			<!-- margin-left: 20%; -->
+			margin-right: 10%;
+        }
+        .section {
+            width: 90%;
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 1px;
+        }
+        .description {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            white-space: pre-wrap;
+        }
+        .resolution {
+            font-size: 18px;
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+        }
+        .source {
+            font-size: 14px;
+            color: #888;
+        }
+        .source a {
+            color: blue;
+            text-decoration: none;
+        }
+        .panel {
+            border: 0.1rem solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+            position: fixed;
+		    margin-left: -6rem;
+        }
+        .panel-header {
+            background: #f5f5f5;
+            padding: 0.1em 1rem;
+            word-wrap: break-word;
+            border-bottom: 0.1rem solid transparent;
+            border-top-right-radius: 0.5rem;
+            border-top-left-radius: 0.5rem;
+            margin: 0;
+            font-size: 20px;
+            font-weight: bold;
+			height: 50px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+        }
+        .categories {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        .categories li {
+            border-bottom: none;
+            padding: 1em 1.5rem;
+            text-align: left;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .categories li:hover,
+        .categories li.selected {
+            background-color: #d7d7d7;
+        }
+		
+		/* Responsive styles */
+		
+		@media screen and (max-width: 768px) {
+		.heading {
+			padding: 5px;
+			font-size: 24px;
+		}
+		.content {
+			margin: 0;
+		}
+		.container {
+			padding-left: 10px;
+			margin-left: 0;
+			margin-right: 0;
+		}
+		.panel {
+			width: 100%;
+			position: static;
+			margin-top: 10px;
+			margin-bottom: 20px;
+		}
+		.panel-header {
+			font-size: 18px;
+		}
+		.categories li {
+			font-size: 16px;
+		}
+}
+		
+		
+    </style>
+
+<!--     <g2:evaluate var="jvar_checks" object="true">
+        var suiteID = gs.getProperty('instance_scan.update_set.suite'); var
+        suiteChecks = new GlideRecord('scan_check_suite_check');
+        suiteChecks.addQuery('suite', suiteID);
+        suiteChecks.addQuery('check.active', true);
+        suiteChecks.orderBy('priority'); suiteChecks.query(); suiteChecks;
+    </g2:evaluate> -->
+
+    <g2:evaluate var="jvar_checks_category" object="true" jelly="true">
+        var scanCategories = new GlideRecord('sys_choice');
+        scanCategories.addEncodedQuery('element=category^name=scan_check^languageSTARTSWITHen^inactive=false');
+        scanCategories.query(); scanCategories;
+    </g2:evaluate>
+
+    <body onload="loadScanResults('all')">
+        <div class="heading">
+            <h1><b>ServiceNow Development Best Practices - Scan Checks</b></h1>
+        </div>
+
+        <div id="scan_content" class="content">
+            <div class="panel">
+                <h2 class="panel-header">Categories</h2>
+                <ul class="categories">
+                    <li data-category="all" onclick="loadScanResults('all')">
+                        All
+                    </li>
+                    <j2:while test="$[jvar_checks_category.next()]">
+                        <j2:set
+                            var="jvar_value"
+                            value="$[jvar_checks_category.getValue('value')]"
+                        />
+                        <li
+                            data-category="$[jvar_value]"
+                            onclick="loadScanResults('$[jvar_value]')"
+                        >
+                            $[jvar_checks_category.getValue('label')]
+                        </li>
+                    </j2:while>
+                </ul>
+            </div>
+        </div>
+    </body>
+</j:jelly>
+]]></html>
+        <name>instance_scan_check_document_archive</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-03-25 19:03:50</sys_created_on>
+        <sys_id>6e02d3251b3da51004c34150f54bcb67</sys_id>
+        <sys_mod_count>236</sys_mod_count>
+        <sys_name>instance_scan_check_document_archive</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>sys_ui_page_6e02d3251b3da51004c34150f54bcb67</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:31</sys_updated_on>
+    </sys_ui_page>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d61499f400000001</claim_timestamp>
+        <metadata_update_name>sys_ui_page_6e02d3251b3da51004c34150f54bcb67</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:31</sys_created_on>
+        <sys_id>af7a16ce874042507bd12fce8bbb354b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:31</sys_updated_on>
+    </sys_claim>
+</record_update>

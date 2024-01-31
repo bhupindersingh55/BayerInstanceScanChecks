@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_table_check">
+    <scan_table_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced>true</advanced>
+        <attributes/>
+        <category>manageability</category>
+        <conditions table="sys_dictionary">internal_type!=collection^nameNOT LIKEimport^EQ<item display_table="sys_glide_object" display_value="Collection" endquery="false" field="internal_type" goto="false" newquery="false" operator="!=" or="false" value="collection"/>
+            <item endquery="false" field="name" goto="false" newquery="false" operator="NOT LIKE" or="false" value="import"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </conditions>
+        <description>Every field is labeled "sentence case" i.e.  which capitalises only the first letter of each sentence (i.e. Risk assessment, Assignment group and Status reason). This is an out-of-box convention within Service-now.</description>
+        <documentation_url/>
+        <finding_type>scan_finding</finding_type>
+        <name>Fields label to be in sentence case</name>
+        <priority>3</priority>
+        <resolution_details>Every field is labeled "sentence case" i.e.  which capitalises only the first letter of each sentence (i.e. Risk assessment, Assignment group and Status reason). This is an out-of-box convention within Service-now.
+
+1. Navigate to Table Builder in AES
+2. Locate the field to be updated
+3. Correct the column label reflecting sentence case</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function(engine) {
+
+    // Define variables
+    var regExpUpper = /^[A-Z]/;
+    var regExpLower = /^[a-z]/;
+    var regExpAllUpperCaseChar = /^[^a-z]*$/;
+    var regExpAllLowerCaseChar = /^[^A-Z]*$/;
+    var fieldLabel = engine.current.column_label.toString();
+
+    // Check field label without sentence case
+    fieldLabel = fieldLabel.split(' ');
+    for (var i = 0; i < fieldLabel.length; i++) {
+        if (i == 0) {
+            if ((!regExpUpper.test(fieldLabel[i])) || regExpAllUpperCaseChar.test(fieldLabel[i]) || regExpAllLowerCaseChar.test(fieldLabel[i])) {
+                engine.finding.increment();
+                break;
+            }
+        } else if (!regExpLower.test(fieldLabel[i]) || regExpAllUpperCaseChar.test(fieldLabel[i])) {
+            engine.finding.increment();
+            break;
+        }
+    }
+
+})(engine);]]></script>
+        <short_description>Fields label to be in sentence case</short_description>
+        <sys_class_name>scan_table_check</sys_class_name>
+        <sys_created_by>GIYYH</sys_created_by>
+        <sys_created_on>2022-10-18 14:38:55</sys_created_on>
+        <sys_id>213aa4b287ae1150fc79edbe8bbb35d3</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Fields label to be in sentence case</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_table_check_213aa4b287ae1150fc79edbe8bbb35d3</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:27</sys_updated_on>
+        <table>sys_dictionary</table>
+        <use_manifest>false</use_manifest>
+    </scan_table_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d61498ea40000001</claim_timestamp>
+        <metadata_update_name>scan_table_check_213aa4b287ae1150fc79edbe8bbb35d3</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:27</sys_created_on>
+        <sys_id>2a7ad2ce874042507bd12fce8bbb3539</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:27</sys_updated_on>
+    </sys_claim>
+</record_update>

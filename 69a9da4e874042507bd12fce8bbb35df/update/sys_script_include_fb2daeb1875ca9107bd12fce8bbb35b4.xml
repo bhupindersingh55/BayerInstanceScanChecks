@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>global.BayerInstanceScanUtil</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>BayerInstanceScanUtil</name>
+        <script><![CDATA[var BayerInstanceScanUtil = Class.create();
+BayerInstanceScanUtil.prototype = Object.extendsObject(InstanceScanUtil, {
+
+    /** Scan the single update set to ensure instance scan has been executed
+     * @param updateSetSysID [String] of a update set to be scanned
+     * @param updateSetName [String] of a update set to be scanned
+     * @param updateSetName [GlideRecord[sys_update_set]] of a update set to be scanned
+     * @return [boolean] 
+     *	        true: [if update set has been scanned successfully]
+     *          false: [if update set has NOT been scanned successfully]
+     **/
+    scanUpdateSet: function(updateSetSysID, updateSetName, updateSetRecord) {
+        var isUpdateSetScanned = true;
+        var scanResult = this.validateScanResults(updateSetSysID);
+        var updateSetLink = this._generateRecordLink("sys_update_set", updateSetSysID, updateSetName);
+        // Validate if the update set has not been been scanned
+        if (scanResult.state == 'false') {
+            isUpdateSetScanned = false;
+            if (updateSetName == updateSetRecord.name) {
+                gs.addErrorMessage(gs.getMessage("Instance Scan is not initiated for this update set."));
+            } else {
+                gs.addErrorMessage(gs.getMessage("Instance Scan is not initiated for the update set: {0} ", [updateSetLink]));
+            }
+            updateSetRecord.setAbortAction(true);
+            return isUpdateSetScanned;
+        }
+        // If the update set is already scanned then verify if it is the most recent scan
+        else {
+            // If the instance scan results are outdated
+            if (!this.validateScanDate(current.sys_id, scanResult.scan_result)) {
+                isUpdateSetScanned = false;
+                if (updateSetName == updateSetRecord.name) {
+                    gs.addErrorMessage(gs.getMessage("Re-Scan the update set as current instance scan results are outdated."));
+                } else {
+                    gs.addErrorMessage(gs.getMessage("Re-Scan the update set {0} as current instance scan results are outdated", [updateSetName]));
+                }
+                updateSetRecord.setAbortAction(true);
+                return isUpdateSetScanned;
+            }
+            // If the instance scan results are current the display the number of findings, if any
+            else {
+                if (scanResult.scan_result.finding_count > 0) {
+                    var scanResultLink = this._generateRecordLink("scan_result", scanResult.scan_result.sys_id, scanResult.scan_result.number);
+                    if (updateSetName == updateSetRecord.name) {
+                        gs.addInfoMessage(gs.getMessage("There are {0} open findings in the instance scan result {1}. It is recommended to review and address the findings before depolying update set to higher instance.", [scanResult.scan_result.finding_count, scanResultLink]));
+                    } else {
+                        gs.addInfoMessage(gs.getMessage("There are {0} open findings against the update set {1} in the instance scan result {2}. It is recommended to review and address the findings before depolying update set to higher instance.", [scanResult.scan_result.finding_count, updateSetLink, scanResultLink]));
+                    }
+                }
+            }
+        }
+    },
+
+    /** Scan only the batch update set to ensure instance scan has been executed
+     * @param updateSetSysID [String] of a batch update set to be scanned
+     * @param updateSetName [String] of a batch update set to be scanned
+     * @param updateSetName [GlideRecord[sys_update_set]] of a batch update set to be scanned
+     * @return [boolean] 
+     *	        true: [if batch update set has been scanned successfully]
+     *          false: [if batch update set has NOT been scanned successfully]
+     **/
+    scanBatchUpdateSet: function(batchUpdateSetRecord) {
+        var updateXML = new GlideRecord('sys_update_xml');
+        updateXML.addQuery('update_set', batchUpdateSetRecord.sys_id);
+        updateXML.query();
+        if (updateXML.next()) {
+            this.scanUpdateSet(batchUpdateSetRecord.sys_id, batchUpdateSetRecord.name, batchUpdateSetRecord);
+        }
+    },
+
+    /** Scan all the child update sets under the batch update set to ensure instance scan has been executed on all child sets
+     * @param updateSetSysID [String] of a batch update set
+     * @param updateSetName [String] of a batch update set
+     * @param updateSetName [GlideRecord[sys_update_set]] of a batch update set to be scanned
+     * @return [boolean] 
+     *	        true: [if all child update set has been scanned successfully and closes all child update sets]
+     *          false: [if one or more child update set has NOT been scanned successfully]
+     **/
+    scanChildUpdateSets: function(batchUpdateSetRecord) {
+        var isUpdateSetScanned;
+        var allChildSetsScanned = true;
+        var child = new GlideRecord("sys_update_set");
+        child.addQuery("base_update_set", batchUpdateSetRecord.sys_id);
+        child.addQuery("sys_id", "!=", batchUpdateSetRecord.sys_id);
+        child.addQuery("state", "in progress");
+        child.query();
+        while (child.next()) {
+            isUpdateSetScanned = this.scanUpdateSet(child.sys_id, child.name, batchUpdateSetRecord);
+            if (isUpdateSetScanned == false) {
+                allChildSetsScanned = false;
+            }
+        }
+        if (allChildSetsScanned) {
+            this._completeChildUpdateSets(batchUpdateSetRecord);
+        }
+    },
+
+    _completeChildUpdateSets: function(batchUpdateSetRecord) {
+        var childSet = new GlideRecord("sys_update_set");
+        childSet.addQuery("base_update_set", batchUpdateSetRecord.sys_id);
+        childSet.addQuery("sys_id", "!=", batchUpdateSetRecord.sys_id);
+        childSet.addQuery("state", "in progress");
+        childSet.setValue("state", "complete");
+        childSet.setWorkflow(false);
+        childSet.updateMultiple();
+    },
+
+    _generateRecordLink: function(tableName, recordSysId, displayLink) {
+        var recordLink = "<a href= " + tableName + ".do?sys_id=" + recordSysId + " target=" + '_blank' + ">" + displayLink + "</a>";
+        return recordLink;
+    },
+
+
+    /** Check if the update set has already been scanned
+     * @param update set sysId [String] of a update set to be scanned
+     * @return [object] with below properties 
+     *	        state: [boolean: indicating whether any existing scan result or not]
+     *          scan_result: [glideRecord: object of scan_result record] 
+     **/
+    validateScanResults: function(updateSetSysId) {
+        var resultExists = {
+            "state": "false",
+            "scan_result": ""
+        };
+        var grScanTarget = new GlideRecord('scan_target');
+        grScanTarget.addQuery('record_id', updateSetSysId);
+        grScanTarget.query();
+        if (grScanTarget.next()) {
+            var grCombo = new GlideRecord('scan_combo');
+            grCombo.addEncodedQuery('targetsLIKE' + grScanTarget.sys_id);
+            grCombo.query();
+            if (grCombo.next()) {
+                var grScanResult = new GlideRecord('scan_result');
+                grScanResult.addQuery('combo', grCombo.sys_id);
+                grScanResult.orderByDesc('sys_created_on');
+                grScanResult.query();
+                if (grScanResult.next()) {
+                    resultExists.state = true;
+                    resultExists.scan_result = grScanResult;
+                    return resultExists;
+                } else {
+                    return resultExists;
+                }
+            } else {
+                return resultExists;
+            }
+        } else {
+            return resultExists;
+        }
+    },
+
+    /** Check if the update set has been scanned after capturing all changes in it. This ensures the scan results are recent.
+     * @param update set sysId [String] of a update set to be scanned
+     * @param scan result record [object:GlideRecord] of the target update set
+     * @return [boolean], true if the scan is recent and false if re-scan of the update set is required 
+     **/
+    validateScanDate: function(updateSetSysId, scanResult) {
+        var recentScan = false;
+        var updateXML = new GlideRecord('sys_update_xml');
+        updateXML.addQuery('update_set', updateSetSysId);
+        updateXML.orderByDesc('sys_updated_on');
+        updateXML.query();
+        if (updateXML.next()) {
+            if (new GlideDateTime(scanResult.sys_created_on).getNumericValue() > new GlideDateTime(updateXML.sys_updated_on).getNumericValue()) {
+                recentScan = true;
+            }
+        }
+        return recentScan;
+
+    },
+
+    type: 'BayerInstanceScanUtil'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-01-10 21:32:42</sys_created_on>
+        <sys_id>fb2daeb1875ca9107bd12fce8bbb35b4</sys_id>
+        <sys_mod_count>65</sys_mod_count>
+        <sys_name>BayerInstanceScanUtil</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>sys_script_include_fb2daeb1875ca9107bd12fce8bbb35b4</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:35</sys_updated_on>
+    </sys_script_include>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d6149b10c0000001</claim_timestamp>
+        <metadata_update_name>sys_script_include_fb2daeb1875ca9107bd12fce8bbb35b4</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:35</sys_created_on>
+        <sys_id>b88a56ce874042507bd12fce8bbb3588</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:35</sys_updated_on>
+    </sys_claim>
+</record_update>

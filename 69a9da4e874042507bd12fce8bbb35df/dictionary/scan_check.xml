@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="update_synch=true" db_object_id="2eea78f3db330010479f3852f3961953" extends="sys_metadata" label="Vérifier" max_length="40" name="scan_check" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Short Description" mandatory="true" max_length="80" name="short_description" type="string"/>
+    </element>
+</database>

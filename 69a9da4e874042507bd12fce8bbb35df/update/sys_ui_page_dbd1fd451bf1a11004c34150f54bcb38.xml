@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[$(document).ready(function() {
+    $(".primary-menu li").click(function() {
+		
+        // Hide Table submenu when Scripting is clicked
+        if ($(this).data("category") === "scripting") {
+            $(".primary-menu li[data-category='table'] > .sub-menu").removeClass("visible");
+            $(".primary-menu li[data-category='categories'] > .sub-menu").removeClass("visible");
+        }
+        if ($(this).data("category") === "categories") {
+            $(".primary-menu li[data-category='table'] > .sub-menu").removeClass("visible");
+        }
+        if ($(this).data("category") === "table") {
+            $(".primary-menu li[data-category='categories'] > .sub-menu").removeClass("visible");
+        }
+
+        // Remove selected class from all menu items
+        $(".primary-menu li").removeClass("selected");
+
+        // Add selected class to clicked item
+        $(this).addClass("selected");
+
+        // Toggle submenu visibility
+        $(this).children(".sub-menu").toggleClass("visible");
+    });
+
+    $(".sub-menu li").click(function(event) {
+        event.stopPropagation();
+    });
+});
+
+]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint/>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+<style>
+	       .heading {
+            background: #F7FAFC;
+            top: 0;
+            width: 100%;
+            padding: 5px 220px;
+            text-align: center;
+			position: fixed;
+        }
+		.content {
+            padding: 1px;
+            margin-left: 100px;
+			margin-bottom:220px;
+			margin-top:150px;
+        }
+		 .heading + .content {
+            padding-top: 0px;
+        }	
+		.container {
+		    display: flex;
+            flex-direction: column;
+			flex-wrap: wrap;
+            gap: 2px;
+<!--             padding-left: 200px;
+            margin-left: 180px;
+            margin-right: 20px; -->
+			padding-left: 20%;
+			<!-- margin-left: 20%; -->
+			margin-right: 10%;
+        }
+        .section {
+            width: 90%;
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 1px;
+        }
+        .description {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            white-space: pre-wrap;
+        }
+        .resolution {
+            font-size: 18px;
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+        }
+        .source {
+            font-size: 14px;
+            color: #888;
+        }
+        .source a {
+            color: blue;
+            text-decoration: none;
+        }
+        .panel {
+            border: 0.1rem solid #ddd;
+            border-radius: 5px;
+            width: 250px;
+            position: fixed;
+		    margin-left: -6rem;
+        }
+        .panel-header {
+            background: #f5f5f5;
+            padding: 0.1em 1rem;
+            word-wrap: break-word;
+            border-bottom: 0.1rem solid transparent;
+            border-top-right-radius: 0.5rem;
+            border-top-left-radius: 0.5rem;
+            margin: 0;
+            font-size: 25px;
+            font-weight: bold;
+			height: 50px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+        }
+
+    .primary-menu {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .primary-menu li {
+      padding: 0.8rem 1.5rem;
+      text-align: left;
+      font-size: 1.7rem;
+      border-bottom: 0.1rem solid #ddd;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .primary-menu li:hover {
+      background-color: #e8e8e8;
+    }
+    
+        .primary-menu li.selected {
+      background-color: #e8e8e8;
+    }
+
+    .sub-menu {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: none;
+	  max-height: 400px; 
+	  overflow-y: auto; 
+    }
+
+    .sub-menu li {
+      padding: 0.8rem 2.5rem;
+      text-align: left;
+      font-size: 1.5rem;
+      border-bottom: 0.1rem solid #ddd;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .sub-menu li:hover {
+      background-color: #cecece;
+    }
+
+    .sub-menu.visible {
+      display: block;
+    }
+    .sub-menu li.selected {
+      background-color: #cecece;
+      font-weight: bold;
+    }
+	
+	
+	
+</style>
+
+	    <g2:evaluate var="jvar_checks_aggsuite" object="true" jelly="true">
+		var suiteID = gs.getProperty('instance_scan.update_set.suite');
+		var aggSuiteCheck = new GlideAggregate('scan_check_suite_check');
+		aggSuiteCheck.addQuery('suite', suiteID);
+		aggSuiteCheck.addQuery('check.active', true);
+		aggSuiteCheck.addQuery('check.sys_class_name','scan_table_check');
+		aggSuiteCheck.addAggregate('COUNT','check.ref_scan_table_check.table');
+		aggSuiteCheck.orderByAggregate('COUNT', 'check.ref_scan_table_check.table');
+		aggSuiteCheck.query();
+		aggSuiteCheck;
+    </g2:evaluate>
+	
+	    <g2:evaluate var="jvar_checks_category" object="true" jelly="true">
+        var scanCategories = new GlideRecord('sys_choice');
+        scanCategories.addEncodedQuery('element=category^name=scan_check^languageSTARTSWITHen^inactive=false');
+        scanCategories.query(); scanCategories;
+    </g2:evaluate>
+	
+	    <body onload="loadScanResults('all')">
+        <div class="heading">
+            <h1><b>ServiceNow Development Best Practices - Scan Checks</b></h1>
+        </div>
+
+        <div id="scan_content" class="content">
+  <div class="panel">
+    <h2 class="panel-header">Filter</h2>
+    <ul class="primary-menu">
+		 <li 
+		  data-category="all"
+		  onclick="loadScanResults('all')"
+		>
+		 All Checks
+		</li>
+      <li 
+		  data-category="scripting"
+		  onclick="loadScanResults('primary_scripting')"
+		>
+		 Checks By Scripting
+		</li>
+      <li 
+		  data-category="table"
+		  
+		>
+		  <!-- onclick="loadScanResults('primary_table')" -->
+       Checks By Table
+		   <span class="toggle-sign"></span>
+        <ul class="sub-menu">
+			
+                    <j2:while test="$[jvar_checks_aggsuite.next()]">
+                        <j2:set
+                            var="jvar_table_internalname"
+                            value="$[jvar_checks_aggsuite.getValue('check.ref_scan_table_check.table')]"
+                        />
+                        <li
+                            data-category="sub_$[jvar_table_internalname]"
+                            onclick="loadScanResults('sub_$[jvar_table_internalname]')"
+                        >
+							<g2:evaluate var="jvar_check_tablename" jelly="true" object="true"> 
+									var checkLabel = new GlideRecord("$[jvar_table_internalname]");
+									var checkTableLabel = checkLabel.getClassDisplayValue();
+									checkTableLabel;
+							</g2:evaluate>
+							
+                            $[jvar_check_tablename]
+                        </li>
+                    </j2:while>
+        </ul>
+      </li>
+		
+		      <li 
+		  data-category="categories"
+		 
+		>
+		<!-- onclick="loadScanResults('categories_all')" -->
+       Checks By Categories
+        <ul class="sub-menu">
+			
+                    <j2:while test="$[jvar_checks_category.next()]">
+                        <j2:set
+                            var="jvar_value"
+                            value="$[jvar_checks_category.getValue('value')]"
+                        />
+                        <li
+                            data-category="$[jvar_value]"
+                            onclick="loadScanResults('categories_$[jvar_value]')"
+                        >
+                            $[jvar_checks_category.getValue('label')]
+                        </li>
+                    </j2:while>
+        </ul>
+      </li>	
+    </ul>
+  </div>
+			
+			</div>
+	</body>
+</j:jelly>]]></html>
+        <name>instance_scan_check_document_copy</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-03-23 22:46:40</sys_created_on>
+        <sys_id>dbd1fd451bf1a11004c34150f54bcb38</sys_id>
+        <sys_mod_count>377</sys_mod_count>
+        <sys_name>instance_scan_check_document_copy</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>sys_ui_page_dbd1fd451bf1a11004c34150f54bcb38</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:44</sys_updated_on>
+    </sys_ui_page>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d6149d1b20000001</claim_timestamp>
+        <metadata_update_name>sys_ui_page_dbd1fd451bf1a11004c34150f54bcb38</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:44</sys_created_on>
+        <sys_id>ba8a1ace874042507bd12fce8bbb353b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:44</sys_updated_on>
+    </sys_claim>
+</record_update>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_update_set</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="sys_update_set">stateCHANGESTOcomplete^EQ<item display_value="Complete" endquery="false" field="state" goto="false" newquery="false" operator="CHANGESTO" or="false" value="complete"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>ValidateInstanceScanResult</name>
+        <order>50</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+
+    var scanUtil = new BayerInstanceScanUtil();
+
+    // Case1: If the current update set is NOT the batch update set base then validate the scan on current update set
+    if (current.base_update_set.sys_id != current.sys_id || current.base_update_set.nil()) {
+        scanUtil.scanUpdateSet(current.sys_id, current.name, current);
+    }
+
+    if (current.base_update_set.sys_id == current.sys_id && !current.base_update_set.nil()) {
+    // Case2: Ensure the current batch update set if has any customer updates then it should also be scanned
+        scanUtil.scanBatchUpdateSet(current);
+    /*
+	   Case3: If the current update set is the batch update set base then validate the scan on all child update sets and allow the closure only if all the update sets are recently scanned.
+				   If YES, then mark both the base and all child update sets as "Completed"
+				   If NO, then leave the status unchanged on base and child update sets 
+	*/
+        scanUtil.scanChildUpdateSets(current);
+    }
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-01-10 23:03:51</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>18e2437d879ca9107bd12fce8bbb356c</sys_id>
+        <sys_mod_count>146</sys_mod_count>
+        <sys_name>ValidateInstanceScanResult</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>sys_script_18e2437d879ca9107bd12fce8bbb356c</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:36</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=18e2437d879ca9107bd12fce8bbb356c"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d6149b4110000001</claim_timestamp>
+        <metadata_update_name>sys_script_18e2437d879ca9107bd12fce8bbb356c</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:36</sys_created_on>
+        <sys_id>708a56ce874042507bd12fce8bbb35b2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:36</sys_updated_on>
+    </sys_claim>
+</record_update>

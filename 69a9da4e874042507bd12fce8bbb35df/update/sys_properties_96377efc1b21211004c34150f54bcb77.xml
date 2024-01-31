@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>This property holds the sys_id of the instance scan suite (created for Bayer) that contains the custom checks to investigate the update sets against the set coding standards.</description>
+        <ignore_cache>true</ignore_cache>
+        <is_private>false</is_private>
+        <name>instance_scan.update_set.suite</name>
+        <read_roles/>
+        <suffix/>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-03-10 22:57:16</sys_created_on>
+        <sys_id>96377efc1b21211004c34150f54bcb77</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>instance_scan.update_set.suite</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>sys_properties_96377efc1b21211004c34150f54bcb77</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:32</sys_updated_on>
+        <type>string</type>
+        <value>82a721fb8758a9507bd12fce8bbb350c</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=96377efc1b21211004c34150f54bcb77"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d6149a1ea0000001</claim_timestamp>
+        <metadata_update_name>sys_properties_96377efc1b21211004c34150f54bcb77</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:32</sys_created_on>
+        <sys_id>7b7a16ce874042507bd12fce8bbb3574</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:32</sys_updated_on>
+    </sys_claim>
+</record_update>

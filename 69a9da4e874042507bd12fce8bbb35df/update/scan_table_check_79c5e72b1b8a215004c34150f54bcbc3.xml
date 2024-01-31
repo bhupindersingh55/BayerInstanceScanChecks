@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_table_check">
+    <scan_table_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced>true</advanced>
+        <attributes/>
+        <category>manageability</category>
+        <conditions table="sys_script">collectionINsc_request,sc_req_item,sc_cart,sc_cart_item^when=before^active=true^EQ<item endquery="false" field="collection" goto="false" newquery="false" operator="IN" or="false" value="sc_request,sc_req_item,sc_cart,sc_cart_item"/>
+            <item display_value="before" endquery="false" field="when" goto="false" newquery="false" operator="=" or="false" value="before"/>
+            <item endquery="false" field="active" goto="false" newquery="false" operator="=" or="false" value="true"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </conditions>
+        <description>Do not create Before Business rule customizations on catalog related tables.&#13;
+</description>
+        <documentation_url>https://docs.servicenow.com/csh?topicname=request-management-architecture.html&amp;version=latest</documentation_url>
+        <finding_type>scan_finding</finding_type>
+        <name>Catalog business rule customizations</name>
+        <priority>2</priority>
+        <resolution_details>It is advised to refrain from implementing Before Business rule customizations on catalog tables. Therefore, it is recommended to either disable, remove, or reconfigure the business rule to avoid using the "before" trigger.</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function (finding, current) {
+
+    var instanceTroubleshooterUtil = new sn_troubleshooter.InstanceTroubleshooterUtil();
+    if (instanceTroubleshooterUtil.isCustomerRecord(current.getTableName(), current.sys_id)) {
+        finding.setCurrentSource(current);
+        finding.increment();
+    } else if (instanceTroubleshooterUtil.hasRecordUpdated(current.getTableName(), current.sys_id)) {
+        finding.setCurrentSource(current);
+        finding.increment();
+    }
+
+})(finding, current);]]></script>
+        <short_description>Avoid before business rules on Catalog tables</short_description>
+        <sys_class_name>scan_table_check</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-04-13 11:53:36</sys_created_on>
+        <sys_id>79c5e72b1b8a215004c34150f54bcbc3</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Catalog business rule customizations</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_table_check_79c5e72b1b8a215004c34150f54bcbc3</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:35</sys_updated_on>
+        <table>sys_script</table>
+        <use_manifest>false</use_manifest>
+    </scan_table_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d6149ae1b0000001</claim_timestamp>
+        <metadata_update_name>scan_table_check_79c5e72b1b8a215004c34150f54bcbc3</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:35</sys_created_on>
+        <sys_id>a88a56ce874042507bd12fce8bbb3557</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:35</sys_updated_on>
+    </sys_claim>
+</record_update>

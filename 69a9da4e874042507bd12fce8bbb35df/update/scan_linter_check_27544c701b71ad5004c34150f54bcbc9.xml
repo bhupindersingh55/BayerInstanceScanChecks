@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_linter_check">
+    <scan_linter_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <attributes/>
+        <category>performance</category>
+        <description/>
+        <documentation_url/>
+        <finding_type>scan_finding</finding_type>
+        <name>Print AST Structure</name>
+        <priority>4</priority>
+        <resolution_details/>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function(engine) {
+
+    engine.rootNode.visit(function(node) {
+        if (node.getAbsolutePosition() === 0 && node.getTypeName() === 'SCRIPT') {
+            gs.info("Print AST Structure " + '\n' + node.debugPrint());
+        }
+    });
+
+})(engine);]]></script>
+        <short_description>Test check to print AST</short_description>
+        <sys_class_name>scan_linter_check</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-03-22 20:10:34</sys_created_on>
+        <sys_id>27544c701b71ad5004c34150f54bcbc9</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Print AST Structure</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_linter_check_27544c701b71ad5004c34150f54bcbc9</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:24</sys_updated_on>
+    </scan_linter_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d614982930000001</claim_timestamp>
+        <metadata_update_name>scan_linter_check_27544c701b71ad5004c34150f54bcbc9</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:24</sys_created_on>
+        <sys_id>f17a92ce874042507bd12fce8bbb356a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:24</sys_updated_on>
+    </sys_claim>
+</record_update>

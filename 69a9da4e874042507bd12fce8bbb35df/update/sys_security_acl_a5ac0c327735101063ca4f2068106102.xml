@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>false</advanced>
+        <condition/>
+        <description>allow read for scan_user</description>
+        <local_or_existing>Local</local_or_existing>
+        <name>scan_check.short_description</name>
+        <operation display_value="read">read</operation>
+        <script/>
+        <security_attribute/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>maint</sys_created_by>
+        <sys_created_on>2020-07-07 20:58:33</sys_created_on>
+        <sys_id>a5ac0c327735101063ca4f2068106102</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>scan_check.short_description</sys_name>
+        <sys_package display_value="Instance Scan" source="com.glide.instance_scan">aaea78f3db330010479f3852f3961952</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>sys_security_acl_a5ac0c327735101063ca4f2068106102</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:41</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d6149c6d10000001</claim_timestamp>
+        <metadata_update_name>sys_security_acl_a5ac0c327735101063ca4f2068106102</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:41</sys_created_on>
+        <sys_id>828ad6ce874042507bd12fce8bbb3565</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:41</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d6149c6d00000001</claim_timestamp>
+        <metadata_update_name>sys_security_acl_a5ac0c327735101063ca4f2068106102</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.instance_scan</previous_claim_name>
+        <previous_claim_scope>com.glide.instance_scan</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:41</sys_created_on>
+        <sys_id>468ad6ce874042507bd12fce8bbb3565</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:41</sys_updated_on>
+    </sys_claim>
+</record_update>

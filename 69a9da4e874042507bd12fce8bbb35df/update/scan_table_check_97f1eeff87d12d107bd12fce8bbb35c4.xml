@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_table_check">
+    <scan_table_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced>false</advanced>
+        <attributes/>
+        <category>manageability</category>
+        <conditions table="wf_activity_definition">nameLIKEapproval^EQ<item endquery="false" field="name" goto="false" newquery="false" operator="LIKE" or="false" value="approval"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </conditions>
+        <description>All Workflow Activity Definition (wf_activity_definition) with name containing "approval" should not be customized.</description>
+        <documentation_url>https://docs.servicenow.com/csh?topicname=r_Approvals.html&amp;version=latest</documentation_url>
+        <finding_type>scan_finding</finding_type>
+        <name>Approval Workflow Activity Definition should not be customized</name>
+        <priority>2</priority>
+        <resolution_details>Revert all Workflow Activity Definition (wf_activity_definition) with name containing "approval" back to their out-of-the-box version.</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function (engine) {
+
+    // Add your code here
+
+})(engine);]]></script>
+        <short_description>Script include catalog task activity should not be customized</short_description>
+        <sys_class_name>scan_table_check</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-03-07 18:48:49</sys_created_on>
+        <sys_id>97f1eeff87d12d107bd12fce8bbb35c4</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Approval Workflow Activity Definition should not be customized</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_table_check_97f1eeff87d12d107bd12fce8bbb35c4</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:29</sys_updated_on>
+        <table>wf_activity_definition</table>
+        <use_manifest>false</use_manifest>
+    </scan_table_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d614999cc0000001</claim_timestamp>
+        <metadata_update_name>scan_table_check_97f1eeff87d12d107bd12fce8bbb35c4</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:29</sys_created_on>
+        <sys_id>5f7ad2ce874042507bd12fce8bbb35f5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:29</sys_updated_on>
+    </sys_claim>
+</record_update>

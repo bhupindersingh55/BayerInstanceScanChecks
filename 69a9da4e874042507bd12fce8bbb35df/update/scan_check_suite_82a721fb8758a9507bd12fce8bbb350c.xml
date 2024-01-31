@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_check_suite">
+    <scan_check_suite action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description>Instance Scan checks to investigate the update sets to ensure development guidelines are being followed.</description>
+        <name>Bayer Development Best Practices</name>
+        <private>false</private>
+        <scorecard>false</scorecard>
+        <sys_class_name>scan_check_suite</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-01-16 21:31:44</sys_created_on>
+        <sys_id>82a721fb8758a9507bd12fce8bbb350c</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Bayer Development Best Practices</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_check_suite_82a721fb8758a9507bd12fce8bbb350c</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:25</sys_updated_on>
+        <triggers/>
+    </scan_check_suite>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d614987770000001</claim_timestamp>
+        <metadata_update_name>scan_check_suite_82a721fb8758a9507bd12fce8bbb350c</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:25</sys_created_on>
+        <sys_id>4e7a92ce874042507bd12fce8bbb35d0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:25</sys_updated_on>
+    </sys_claim>
+</record_update>

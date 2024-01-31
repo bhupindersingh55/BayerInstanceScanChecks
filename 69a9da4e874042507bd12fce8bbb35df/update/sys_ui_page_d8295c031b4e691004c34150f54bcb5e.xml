@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[// Code to close submenus when clicking outside the menu
+document.addEventListener('click', function(event) {
+  var isClickInsideMenu = document.querySelector('.menu').contains(event.target);
+  if (!isClickInsideMenu) {
+    var submenus = document.querySelectorAll('.submenu');
+    for (var i = 0; i < submenus.length; i++) {
+      submenus[i].style.display = 'none';
+    }
+  }
+});
+
+
+]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint/>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	
+	
+
+	<style> 
+	.menu {
+    width: 300px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.item {
+    border-top: 1px solid #18dcff;
+    overflow: hidden;
+}
+
+.btn {
+    display: block;
+    padding: 16px 20px;
+    background: #17c0eb;
+    color: white;
+    position: relative;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: #17c0eb;
+    left: 20px;
+    bottom: -7px;
+    transform: rotate(45deg);
+}
+
+.btn i {
+    margin-right: 10px;
+}
+
+.smenu {
+    background: #333;
+    overflow: hidden;
+    transition: max-height 0.3s;
+    max-height: 0;
+}
+
+.smenu a {
+    display: block;
+    padding: 16px 26px;
+    color: white;
+    margin: 4px 0;
+    position: relative;
+}
+
+.smenu a::before {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 100%;
+    background: #18dcff;
+    left: 0;
+    top: 0;
+    transition: .3s;
+    opacity: 0;
+}
+
+.smenu a:hover::before {
+    opacity: 1;
+}
+
+.item:target .smenu {
+    max-height: 10em;
+}
+	</style>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"></link>
+	
+	<div class="middle">
+        <div class="menu">
+            <ul>
+                <li class="item" id="profile">
+                    <a href="#profile" class="btn"><i class="fa fa-user"></i> Profile</a>
+                    <div class="smenu">
+                        <a href="">Post</a>
+                        <a href="">Picture</a>
+                    </div>
+                </li>
+
+                <li class="item" id="messages">
+                    <a href="#messages" class="btn"><i class="fa fa-envelope"></i> Messages</a>
+                    <div class="smenu">
+                        <a href="">New</a>
+                        <a href="">Sent</a>
+                        <a href="">Spam</a>
+                    </div>
+                </li>
+
+                <li class="item" id="settings">
+                    <a href="#settings" class="btn"><i class="fa fa-cog"></i> Settings</a>
+                    <div class="smenu">
+                        <a href="">Password</a>
+                        <a href="">Language</a>
+                    </div>
+                </li>
+
+                <li class="item">
+                    <a href="#" class="btn"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</j:jelly>]]></html>
+        <name>Vertical Menu</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-04-11 07:47:17</sys_created_on>
+        <sys_id>d8295c031b4e691004c34150f54bcb5e</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Vertical Menu</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>sys_ui_page_d8295c031b4e691004c34150f54bcb5e</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:27</sys_updated_on>
+    </sys_ui_page>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d61498f360000001</claim_timestamp>
+        <metadata_update_name>sys_ui_page_d8295c031b4e691004c34150f54bcb5e</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:27</sys_created_on>
+        <sys_id>2e7ad2ce874042507bd12fce8bbb3541</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:27</sys_updated_on>
+    </sys_claim>
+</record_update>

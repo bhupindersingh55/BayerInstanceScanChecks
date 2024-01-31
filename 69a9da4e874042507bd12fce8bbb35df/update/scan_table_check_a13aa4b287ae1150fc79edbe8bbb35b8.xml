@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_table_check">
+    <scan_table_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <advanced>true</advanced>
+        <attributes/>
+        <category>performance</category>
+        <conditions/>
+        <description>Club all the onSubmit() client scripts into one, otherwise, it leads to ambiguity when form is submited and user may get confused with background details.</description>
+        <documentation_url/>
+        <finding_type>scan_finding</finding_type>
+        <name>Merge onSubmit() client scripts</name>
+        <priority>2</priority>
+        <resolution_details>Club all the onSubmit() client scripts into one, otherwise, it leads to ambiguity when form is submited and user may get confused with background details.</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function(engine) {
+
+    // Declare the variables
+    var tableName = engine.current.getValue('table');
+
+    // Count number of active onLoad client scripts for application table
+    var aggScripts = new GlideAggregate('sys_script_client');
+    aggScripts.addQuery('type', 'onSubmit');
+    aggScripts.addQuery('table', tableName);
+    aggScripts.addActiveQuery();
+    aggScripts.addAggregate('COUNT', 'table');
+    aggScripts.query();
+    if (aggScripts.next()) {
+        var scriptCount = aggScripts.getAggregate('COUNT', 'table');
+        if (scriptCount > 1) {
+            engine.finding.setCurrentSource(tableName);
+            engine.finding.increment();
+        }
+    }
+
+})(engine);]]></script>
+        <short_description>Merge onSubmit() client scripts</short_description>
+        <sys_class_name>scan_table_check</sys_class_name>
+        <sys_created_by>GIYYH</sys_created_by>
+        <sys_created_on>2022-10-18 14:38:54</sys_created_on>
+        <sys_id>a13aa4b287ae1150fc79edbe8bbb35b8</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Merge onSubmit() client scripts</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_table_check_a13aa4b287ae1150fc79edbe8bbb35b8</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:28</sys_updated_on>
+        <table>sys_script_client</table>
+        <use_manifest>false</use_manifest>
+    </scan_table_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d614993de0000001</claim_timestamp>
+        <metadata_update_name>scan_table_check_a13aa4b287ae1150fc79edbe8bbb35b8</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:28</sys_created_on>
+        <sys_id>f67ad2ce874042507bd12fce8bbb358b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:28</sys_updated_on>
+    </sys_claim>
+</record_update>

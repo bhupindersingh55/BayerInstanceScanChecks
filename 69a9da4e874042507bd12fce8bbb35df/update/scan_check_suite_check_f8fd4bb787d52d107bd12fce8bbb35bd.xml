@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_check_suite_check">
+    <scan_check_suite_check action="INSERT_OR_UPDATE">
+        <check display_value="Scripted REST API without Authentication">b99d0b3787d52d107bd12fce8bbb3513</check>
+        <score_weight>1</score_weight>
+        <suite display_value="Bayer Development Best Practices">82a721fb8758a9507bd12fce8bbb350c</suite>
+        <sys_class_name>scan_check_suite_check</sys_class_name>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2023-03-07 22:00:53</sys_created_on>
+        <sys_id>f8fd4bb787d52d107bd12fce8bbb35bd</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_check_suite_check_f8fd4bb787d52d107bd12fce8bbb35bd</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:25</sys_updated_on>
+    </scan_check_suite_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d614988b50000001</claim_timestamp>
+        <metadata_update_name>scan_check_suite_check_f8fd4bb787d52d107bd12fce8bbb35bd</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:25</sys_created_on>
+        <sys_id>1e7a92ce874042507bd12fce8bbb35e1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:25</sys_updated_on>
+    </sys_claim>
+</record_update>

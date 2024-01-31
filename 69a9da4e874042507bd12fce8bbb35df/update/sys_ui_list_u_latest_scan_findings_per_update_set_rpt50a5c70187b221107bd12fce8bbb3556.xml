@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_list parent="" relationship="" sys_domain="global" table="u_latest_scan_findings_per_update_set" version="2" view="RPT50a5c70187b221107bd12fce8bbb3556">
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>sf_check</element>
+            <list_id display_value="u_latest_scan_findings_per_update_set" element="NULL" name="u_latest_scan_findings_per_update_set" parent="NULL" relationship="NULL" sys_domain="global" view="038c3e0147893d14e419f818036d4302">cd81dbcd873261107bd12fce8bbb35fc</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>0</position>
+            <sum>false</sum>
+            <sys_created_by>EGMCF</sys_created_by>
+            <sys_created_on>2023-05-12 22:47:22</sys_created_on>
+            <sys_id>c981dbcd873261107bd12fce8bbb35fd</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>EGMCF</sys_updated_by>
+            <sys_updated_on>2023-05-12 22:47:22</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>sf_source</element>
+            <list_id display_value="u_latest_scan_findings_per_update_set" element="NULL" name="u_latest_scan_findings_per_update_set" parent="NULL" relationship="NULL" sys_domain="global" view="038c3e0147893d14e419f818036d4302">cd81dbcd873261107bd12fce8bbb35fc</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>1</position>
+            <sum>false</sum>
+            <sys_created_by>EGMCF</sys_created_by>
+            <sys_created_on>2023-05-12 22:47:22</sys_created_on>
+            <sys_id>4d81dbcd873261107bd12fce8bbb35fd</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>EGMCF</sys_updated_by>
+            <sys_updated_on>2023-05-12 22:47:22</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>sf_source_table</element>
+            <list_id display_value="u_latest_scan_findings_per_update_set" element="NULL" name="u_latest_scan_findings_per_update_set" parent="NULL" relationship="NULL" sys_domain="global" view="038c3e0147893d14e419f818036d4302">cd81dbcd873261107bd12fce8bbb35fc</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>2</position>
+            <sum>false</sum>
+            <sys_created_by>EGMCF</sys_created_by>
+            <sys_created_on>2023-05-12 22:47:22</sys_created_on>
+            <sys_id>cd81dbcd873261107bd12fce8bbb35fd</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>EGMCF</sys_updated_by>
+            <sys_updated_on>2023-05-12 22:47:22</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>sc_targets</element>
+            <list_id display_value="u_latest_scan_findings_per_update_set" element="NULL" name="u_latest_scan_findings_per_update_set" parent="NULL" relationship="NULL" sys_domain="global" view="038c3e0147893d14e419f818036d4302">cd81dbcd873261107bd12fce8bbb35fc</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>3</position>
+            <sum>false</sum>
+            <sys_created_by>EGMCF</sys_created_by>
+            <sys_created_on>2023-05-12 22:47:22</sys_created_on>
+            <sys_id>4181dbcd873261107bd12fce8bbb35fe</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>EGMCF</sys_updated_by>
+            <sys_updated_on>2023-05-12 22:47:22</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>sf_count</element>
+            <list_id display_value="u_latest_scan_findings_per_update_set" element="NULL" name="u_latest_scan_findings_per_update_set" parent="NULL" relationship="NULL" sys_domain="global" view="038c3e0147893d14e419f818036d4302">cd81dbcd873261107bd12fce8bbb35fc</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>4</position>
+            <sum>false</sum>
+            <sys_created_by>EGMCF</sys_created_by>
+            <sys_created_on>2023-05-12 22:47:22</sys_created_on>
+            <sys_id>c181dbcd873261107bd12fce8bbb35fe</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>EGMCF</sys_updated_by>
+            <sys_updated_on>2023-05-12 22:47:22</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>sr_state</element>
+            <list_id display_value="u_latest_scan_findings_per_update_set" element="NULL" name="u_latest_scan_findings_per_update_set" parent="NULL" relationship="NULL" sys_domain="global" view="038c3e0147893d14e419f818036d4302">cd81dbcd873261107bd12fce8bbb35fc</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>5</position>
+            <sum>false</sum>
+            <sys_created_by>EGMCF</sys_created_by>
+            <sys_created_on>2023-05-12 22:47:22</sys_created_on>
+            <sys_id>4581dbcd873261107bd12fce8bbb35fe</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>EGMCF</sys_updated_by>
+            <sys_updated_on>2023-05-12 22:47:22</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>sf_sys_created_on</element>
+            <list_id display_value="u_latest_scan_findings_per_update_set" element="NULL" name="u_latest_scan_findings_per_update_set" parent="NULL" relationship="NULL" sys_domain="global" view="038c3e0147893d14e419f818036d4302">cd81dbcd873261107bd12fce8bbb35fc</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>6</position>
+            <sum>false</sum>
+            <sys_created_by>EGMCF</sys_created_by>
+            <sys_created_on>2023-05-12 22:47:22</sys_created_on>
+            <sys_id>c581dbcd873261107bd12fce8bbb35fe</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>EGMCF</sys_updated_by>
+            <sys_updated_on>2023-05-12 22:47:22</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element/>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <name>u_latest_scan_findings_per_update_set</name>
+            <parent/>
+            <position/>
+            <relationship/>
+            <sum>false</sum>
+            <sys_class_name>sys_ui_list</sys_class_name>
+            <sys_created_by>EGMCF</sys_created_by>
+            <sys_created_on>2023-05-12 22:47:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>cd81dbcd873261107bd12fce8bbb35fc</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_name>u_latest_scan_findings_per_update_set</sys_name>
+            <sys_package display_value="Global" source="global">global</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+            <sys_update_name>sys_ui_list_u_latest_scan_findings_per_update_set_RPT50a5c70187b221107bd12fce8bbb3556</sys_update_name>
+            <sys_updated_by>EGMCF</sys_updated_by>
+            <sys_updated_on>2024-01-31 20:51:28</sys_updated_on>
+            <sys_user/>
+            <view display_value="Rpt50a5c70187b221107bd12fce8bbb3556" name="RPT50a5c70187b221107bd12fce8bbb3556">038c3e0147893d14e419f818036d4302</view>
+            <view_name/>
+        </sys_ui_list>
+    </sys_ui_list>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d614a80320000001</claim_timestamp>
+        <metadata_update_name>sys_ui_list_u_latest_scan_findings_per_update_set_RPT50a5c70187b221107bd12fce8bbb3556</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:51:28</sys_created_on>
+        <sys_id>65ba5ece874042507bd12fce8bbb35a3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:51:28</sys_updated_on>
+    </sys_claim>
+</record_update>

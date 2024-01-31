@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_linter_check">
+    <scan_linter_check action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <attributes/>
+        <category>manageability</category>
+        <description>The "gs.log()", "gs.debug()", "console.log()", etc. statements can be used to write information to the system log, while the "gs.print()", etc. statements also sends it as output to the screen. It is generally used when debugging. Using "gs.log()", "gs.debug()", "console.log()", etc. statements on a production instance will pollute the system log, while it is never used as you do not perform debugging on a production instance.</description>
+        <documentation_url>https://developer.servicenow.com/dev.do#!/guides/sandiego/now-platform/tpb-guide/debugging_best_practices#disabling-debugging</documentation_url>
+        <finding_type>scan_finding</finding_type>
+        <name>Scripts should not contain debugging statements in production</name>
+        <priority>3</priority>
+        <resolution_details>The best practice is to remove (commented) debug statements from scripts or making them conditionally controlled by a property.</resolution_details>
+        <run_condition/>
+        <score_max>100</score_max>
+        <score_min>0</score_min>
+        <score_scale>1</score_scale>
+        <script><![CDATA[(function(engine) {
+
+ engine.rootNode.visit(function(node) {
+  // gs.log, gs.info, gs.debug, gs.print
+  if(node.getTypeName() === "GETPROP") {
+   var gs_found = false;
+   var method_found = false;
+
+   node.visit(function(childnode) {
+    if(childnode.getTypeName() != "NAME") {
+     return;
+    }
+
+    if(childnode.getNameIdentifier() === "log" || childnode.getNameIdentifier() === "info" || childnode.getNameIdentifier() === "debug" || childnode.getNameIdentifier() === "print") {
+     method_found = true;
+     return;
+    }
+
+    if(childnode.getNameIdentifier() === "gs") {
+     gs_found = true;
+     return;
+    }
+   });
+
+   // Create scan finding
+   if(gs_found && method_found) {
+    engine.finding.incrementWithNode(node);
+   }
+  }
+  
+  // console.log
+  if(node.getTypeName() === "GETPROP") {
+   var console_found = false;
+   var log_found = false;
+
+   node.visit(function(childnode) {
+    if(childnode.getTypeName() != "NAME") {
+     return;
+    }
+
+    if(childnode.getNameIdentifier() === "log") {
+     log_found = true;
+     return;
+    }
+
+    if(childnode.getNameIdentifier() === "console") {
+     console_found = true;
+     return;
+    }
+   });
+
+   // Create scan finding
+   if(console_found && log_found) {
+    engine.finding.incrementWithNode(node);
+   }
+  }
+  
+  // jslog
+  if(node.getNameIdentifier() && node.getTypeName() === 'NAME' && node.getNameIdentifier() === 'jslog' && node.getParent().getTypeName() === 'CALL') {
+   // Create scan finding
+   engine.finding.incrementWithNode(node);
+  }
+
+ });
+
+})(engine);]]></script>
+        <short_description>Scripts should not contain debugging statements in production</short_description>
+        <sys_class_name>scan_linter_check</sys_class_name>
+        <sys_created_by>GIYYH</sys_created_by>
+        <sys_created_on>2022-10-18 14:38:56</sys_created_on>
+        <sys_id>713ae4b287ae1150fc79edbe8bbb3516</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_name>Scripts should not contain debugging statements in production</sys_name>
+        <sys_package display_value="Global" source="global">global</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</sys_scope>
+        <sys_update_name>scan_linter_check_713ae4b287ae1150fc79edbe8bbb3516</sys_update_name>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:36</sys_updated_on>
+    </scan_linter_check>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="BayerInstanceScanChecks">69a9da4e874042507bd12fce8bbb35df</claim_owner_scope>
+        <claim_timestamp>18d6149b2620000001</claim_timestamp>
+        <metadata_update_name>scan_linter_check_713ae4b287ae1150fc79edbe8bbb3516</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>BayerInstanceScanChecks</previous_claim_name>
+        <previous_claim_scope>69a9da4e874042507bd12fce8bbb35df</previous_claim_scope>
+        <sys_created_by>EGMCF</sys_created_by>
+        <sys_created_on>2024-01-31 20:50:36</sys_created_on>
+        <sys_id>fc8a56ce874042507bd12fce8bbb3594</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>EGMCF</sys_updated_by>
+        <sys_updated_on>2024-01-31 20:50:36</sys_updated_on>
+    </sys_claim>
+</record_update>
